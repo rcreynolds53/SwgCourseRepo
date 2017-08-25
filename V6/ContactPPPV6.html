@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact Us</title>
+        <script type="text/javascript" src="/Users/macbookpro/Documents/Project/Labs/Restaurant/V5/contactUs.js"></script>
+         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        rel="stylesheet" type="text/css" />
+        <link href="/Users/macbookpro/Documents/SG-Bootcamp/rob-reynolds-individual-work/V6/restarauntstyles2.css"
+        rel="stylesheet" type="text/css"/>
+        <link href="/Users/macbookpro/Documents/SG-Bootcamp/rob-reynolds-individual-work/V6/fonts/GoodDog-fontfacekit (2)/web fonts/gooddog_regular_macroman/stylesheet.css"
+        rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header>Papa Pitera's</header>
+        <hr id="hr">
+        <div>
+            <ul class="nav nav-tabs">
+                <li><a href="/Users/macbookpro/Documents/SG-Bootcamp/rob-reynolds-individual-work/V6/RestaurantV6.html"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li><a href="/Users/macbookpro/Documents/SG-Bootcamp/rob-reynolds-individual-work/V6/MenuV6.html">Menu</a></li>
+                <li class="active"><a href="/Users/macbookpro/Documents/SG-Bootcamp/rob-reynolds-individual-work/V6/ContactPPPV6.html">Contact Us</a></li>
+            </ul>
+        </div>
+         <div class="container-fluid" style="border-top: 3px solid black; border-bottom: 3px solid black"><br>
+             <form class="form-horizontal" action="#" method="POST" name="contactForm" onsubmit="return validateForm();">
+                 <div class="form-group">
+                     <label class="control-label col-xs-2" for="InputName">Name:</label>
+                     <div class="input-group col-xs-6 col-xs-offset-3">
+                         <input type="text" class="form-control" id="inputName" placeholder="First Last">
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label col-xs-2" for="InputEmail">Email:</label>
+                     <div class="input-group col-xs-6 col-xs-offset-3">
+                         <span class="input-group-addon">@</span>
+                         <input type="text" class="form-control" id="inputEmail">
+                     </div>
+                     </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2" for="Phone">Phone:</label>
+                    <div class="input-group col-xs-6 col-xs-offset-3">
+                        <input type="text" class="form-control" id="inputPhone" placeholder="012-345-6789">
+                    </div>
+                    </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2" for="ReasonForInquiry">Reason for Inquiry:</label>
+                    <div class="input-group col-xs-6 col-xs-offset-3">
+                    <select class="selectpicker show-tick form-control" id="inquiryReason">
+                        <option>Catering</option>
+                        <option>Private Party</option>
+                        <option>Feedback</option>
+                        <option>Other</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-2" for="AdditionalInfo">Additional Information:</label>
+                    <div class="input-group col-xs-6 col-xs-offset-3">
+                        <textarea class="form-control" id="additionalInfo" type="text" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" id="radios">
+                    <label class="control-label col-xs-2" for="Customer">Have you been to our restaurant?</label>
+                    <label class="custom-control custom-radio col-xs-offset-1">
+                        <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Yes</span>
+                    </label>
+                        <label class="custom-control custom-radio">
+                        <input id="radio2" name="radio" type="radio" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">No</span>
+                        </label>
+                </div>
+                <div class="form-group" id="contactDay">
+                    <label class="control-label col-xs-2" for="ContactDays">Best day to contact you:</label>
+                    <label class="checkbox-inline col-xs-1 col-xs-offset-1">
+                    <input type="checkbox" id="checkbox1" value="option1"> M
+                    </label>
+                    <label class="checkbox-inline col-xs-1">
+                    <input type="checkbox" id="checkbox2" value="option2"> T
+                    </label>
+                    <label class="checkbox-inline col-xs-1">
+                    <input type="checkbox" id="checkbox3" value="option3"> W
+                    </label>
+                     <label class="checkbox-inline col-xs-1">
+                    <input type="checkbox" id="checkbox4" value="option4"> Th
+                    </label>
+                    <label class="checkbox-inline col-cs-1">
+                    <input type="checkbox" id="checkbox5" value="option5"> F
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-lg col-xs-offset-5" id="submitButton" type="submit">Send Request</button>
+                </div>
+                </form>
+         </div>
+        <!--<form action="#" method="POST" style="margin-top: 10px">
+            <div>
+                <label id="NameLabel" for="Name">Name:</label>
+                <input id="Name" name="Name" type="text" style="width:33%"/>
+            </div><br>
+            <div>
+                <label id="EmailLabel" for="Email">Email:</label>
+                <input id="Email" name="Email" type="text" style="width:33%"/>
+            </div><br>
+            <div>
+                <label id="PhoneLabel" for="Phone">Phone:</label>
+                <input id="Phone" name="Phone" type="text" style="width:33%"/>
+            </div><br>
+            <div>
+                <b>Reason for Inquiry:</b><select name="ReasonForInquiry" style="margin-left:18px">
+                    <option value="Catering">Catering (default)</option>
+                    <option value="PrivateParty">Private Party</option>
+                    <option value="Feedback">Feedback</option>
+                    <option value="Other">Other</option>
+                    </select>
+            </div><br>
+            <div>
+                <label id="AdditionalInfo" for="AdditionalInfo">Additional Information:</label>
+                <textarea id="Additional Information" name="message" type="text"></textarea>
+            </div><br>
+            <div>
+            <label id="CustomerLabel" for="Customer">Have you been to our restaurant?</label>
+            <input type="radio" name="answer" value="No"/>No
+            <input type="radio" name="answer" value="Yes"/>Yes
+            </div><br>
+            <div class="checkbox1">
+                <label id="BestContactDays" for="ContactingCustomer">Best day to contact you:</label>
+                <input type="checkbox" name="CustomerContact" value="MTWTF">M  
+                <input type="checkbox" name="CustomerContact" value="MTWTF" style="margin-left:15px">T  
+                <input type="checkbox" name="CustomerContact" value="MTWTF"style="margin-left:15px">W  <input type="checkbox" name="CustomerContact" value="MTWTF" style="margin-left:15px">Th  
+                <input type="checkbox" name="CustomerContact" value="MTWTF" style="margin-left:15px">F
+            </div><br>
+            <div>
+                <input type="submit" id="SendRequest" value="Send Request" style="margin-left:225px">
+            </div><br>
+        </form><hr>
+         </div>-->
+                <footer>
+                    <p style="text-align:center">3253 S. Pitera Dr. Port Orange, FL 32119<br>210-435-7766</p>
+                </footer>
+    </body>
+</html>
+        

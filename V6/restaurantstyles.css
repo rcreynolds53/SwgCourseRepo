@@ -1,0 +1,59 @@
+header {
+    font-family:GoodDogregular; 
+    font-size:30pt; 
+    text-align:center; 
+    color: darkolivegreen
+        }
+#hr {
+        border: 1px solid black;
+    }
+.nav.nav-tabs li a {
+        color: darkolivegreen;
+        width: 200px;
+        font-weight: bold;
+        font-family: GoodDogRegular;
+        font-size: 18pt;
+        }
+/*
+ul>li>a:visited {
+        color: darkolivegreen;
+        }
+*/
+ul>li>a:hover {
+        color: firebrick;
+        }
+#foodgroup {
+        font-family: GoodDogregular;
+        font-size: 24pt;
+        color: firebrick;
+        }
+#fooditems {
+        background-color: gray;
+        color:firebrick;
+        font-family: GoodDogregular;
+        font-size: 18pt;
+        font-weight: bold
+        }
+#menudescription {
+        color:black;
+        font-weight: 500
+        }
+footer {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10px;
+}
+/*
+header {text-align: center;
+    font-size: 30pt;
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top: 5px}
+footer {text-align: center;
+        padding-bottom:5px}
+a {padding-right: 10px;
+padding-left: 10px}
+a:link {text-decoration: none; color: firebrick}
+a:visited {color: darkolivegreen;}
+a:hover {font-weight: bold;}
+*/

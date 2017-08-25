@@ -1,0 +1,13 @@
+Given a string, return a new string where the first and last chars have been exchanged. 
+
+FrontBack("code") -> "eodc"
+FrontBack("a") -> "a"
+FrontBack("ab") -> "ba"
+
+public string FrontBack(string str) {
+
+char start = s[0];
+
+char last = s[s.Length -1];
+
+}

@@ -1,0 +1,9 @@
+@font-face {
+            font-family: GoodDog; 
+            src: url("/Users/macbookpro/Documents/GoodDog/GoodDog.otf") format("opentype")
+            }
+    @font-face {
+        font-family: GoodDog;
+        font-weight: bold
+        src: url("/Users/macbookpro/Documents/Project/Labs/Restaurant/GoodDog-webfont.woff") format("opentype")
+    }
