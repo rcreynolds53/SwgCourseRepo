@@ -60,13 +60,14 @@ namespace Warmups.BLL
 
         public string EveryOther(string str)
         {
+            /*
             string Others = "";
             for (int i = 0; i < str.Length; i+2) 
             {
                 Others = str.Remove(i);
             }
             return Others;
-        }
+        }*/
 
         public string StringSplosion(string str)
         {
