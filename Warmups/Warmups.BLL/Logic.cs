@@ -73,8 +73,8 @@ namespace Warmups.BLL
 
         public string AlarmClock(int day, bool vacation)
         {
-            
-            if(!vacation && (day > 0 && day< 6))
+
+            if (!vacation && (day > 0 && day < 6))
             {
                 return "7:00";
             }
@@ -88,48 +88,48 @@ namespace Warmups.BLL
 
             return (a == 6 || b == 6 || sum == 6 || diff == 6);
         }
-        
+
         public bool InRange(int n, bool outsideMode)
         {
-            while(outsideMode)
+            while (outsideMode)
             {
-                if(n<= 1 || n >=10) 
+                if (n <= 1 || n >= 10)
                 {
                     return true;
                 }
                 return false;
             }
-            if(!outsideMode && (n >= 1 && n <= 10))
+            if (!outsideMode && (n >= 1 && n <= 10))
             {
                 return true;
             }
             return false;
 
         }
-        
+
         public bool SpecialEleven(int n)
         {
             bool isSpecial = (n % 11 == 0 || n % 11 == 1);
             return isSpecial;
         }
-        
+
         public bool Mod20(int n)
         {
             bool is1or2More = (n > -1 && (n % 20 == 1 || n % 20 == 2));
             return is1or2More;
         }
-        
+
         public bool Mod35(int n)
         {
             bool isMult3or5 = (n > -1 && (n % 3 == 0 || n % 5 == 0) && !(n % 3 == 0 && n % 5 == 0));
             return isMult3or5;
         }
-        
+
         public bool AnswerCell(bool isMorning, bool isMom, bool isAsleep)
         {
-            while(!isAsleep)
+            while (!isAsleep)
             {
-                if((isMom && isMorning) || !isMorning)
+                if ((isMom && isMorning) || !isMorning)
                 {
                     return true;
                 }
@@ -137,35 +137,64 @@ namespace Warmups.BLL
             }
             return false;
         }
-        
+
         public bool TwoIsOne(int a, int b, int c)
         {
-            if(a== (b + c)|| b == (a + c) || c == (a + b))
+            if (a == (b + c) || b == (a + c) || c == (a + b))
             {
                 return true;
             }
             return false;
         }
-        
+
         public bool AreInOrder(int a, int b, int c, bool bOk)
         {
-            throw new NotImplementedException();
-        }
-        
-        public bool InOrderEqual(int a, int b, int c, bool equalOk)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public bool LastDigit(int a, int b, int c)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public int RollDice(int die1, int die2, bool noDoubles)
-        {
-            throw new NotImplementedException();
+            if (a < b && b < c && !bOk)
+            {
+                return true;
+            }
+            else if (bOk && c > b)
+            {
+                return true;
+            }
+            return false;
         }
 
+        public bool InOrderEqual(int a, int b, int c, bool equalOk)
+        {
+            if (b == (2 * a + 1) && c == (2 * b + 1))
+            {
+                return true;
+            }
+            else if (equalOk && (b == a || b == c))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool LastDigit(int a, int b, int c)
+        {
+            string strA = a.ToString();
+            string strB = b.ToString();
+            string strC = c.ToString();
+
+            if (strA.Substring(strA.Length - 1, 1) == strB.Substring(strB.Length - 1, 1) || (strA.Substring(strA.Length - 1, 1) == strC.Substring(strC.Length - 1, 1)))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public int RollDice(int die1, int die2, bool noDoubles)
+        {
+            int sum = die1 + die2;
+
+            if (noDoubles && die1 == die2)
+            {
+                return sum + 1;
+            }
+            return sum;
+        }
     }
 }

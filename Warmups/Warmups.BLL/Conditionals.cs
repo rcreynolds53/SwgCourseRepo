@@ -277,7 +277,13 @@ namespace Warmups.BLL
         
         public string EveryNth(string str, int n)
         {
-            throw new NotImplementedException();
+            string EveryN = "";
+
+            for (int i = 0; i < str.Length; i+=n)
+            {
+                EveryN += str.Substring(i, 1);
+            }
+            return EveryN;
         }
     }
 }

@@ -1,4 +1,5 @@
-Given a non-empty string like "Code" return a string like "CCoCodCode".  (first char, first two, first 3, etc)
+Given a non-empty string like "Code" return a string like "CCoCodCode".  
+(first char, first two, first 3, etc)
 
 StringSplosion("Code") -> "CCoCodCode"
 StringSplosion("abc") -> "aababc"

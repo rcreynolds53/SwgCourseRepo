@@ -11,7 +11,7 @@ namespace Warmups.Tests
         [TestCase(new[] { 1, 2, 6 }, true)]
         [TestCase(new[] { 6, 1, 2, 3 }, true)]
         [TestCase(new[] { 13, 6, 1, 2, 3 }, false)]
-
+        
         public void FirstLast6Test(int[] nums, bool expected)
         {
             var actual = _arrays.FirstLast6(nums);
