@@ -192,7 +192,11 @@ namespace Warmups.BLL
 
             if (noDoubles && die1 == die2)
             {
-                return sum + 1;
+                sum++;
+            }
+            else if(noDoubles && (die1 == 6 && die2 ==6))
+            {
+                sum = 7;
             }
             return sum;
         }

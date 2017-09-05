@@ -18,14 +18,14 @@ namespace Warmups.BLL
         }
         public int[] MakePi(int n)
         {
-            var pi = Math.PI;
-            string str = pi.ToString().Remove(1, 1);
-            int[] numbers = new int[n];
+            int[] PiArray = { 3, 1, 4, 1, 5, 9, 2 };
+            int[] NewPi = new int[n];
+
             for (int i = 0; i < n; i++)
             {
-                numbers[i] = int.Parse(str[i].ToString());
+                 NewPi[i] = PiArray[i];
             }
-            return numbers;
+            return NewPi;
 
         }
         public bool CommonEnd(int[] a, int[] b)

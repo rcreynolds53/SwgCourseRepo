@@ -277,7 +277,7 @@ namespace Warmups.BLL
         
         public string EveryNth(string str, int n)
         {
-            string EveryN = "";
+            string EveryN = ""; //instantiate new string 
 
             for (int i = 0; i < str.Length; i+=n)
             {
