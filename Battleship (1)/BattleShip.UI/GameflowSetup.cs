@@ -14,12 +14,12 @@ namespace BattleShip.UI
     {
         public GameState SetupPlayersBoard()
         {
-            ConsoleInput.DisplaySplash();
-            string p1 = ConsoleInput.GetName(1);
+            ConsoleOutput.DisplaySplash();
+            string p1 = ConsoleOutput.GetName(1);
             //string p2 = ConsoleInput.GetName(2);                      
             //skipping over instantiating the board for now 
             Board b1 = BuildBoard(p1);
-			string p2 = ConsoleInput.GetName(2);
+            string p2 = ConsoleOutput.GetName(2);
 
 			Board b2 = BuildBoard(p2);
 			Player player1 = new Player(p1,b1);
@@ -50,19 +50,19 @@ namespace BattleShip.UI
             {
                 PlaceShipRequest shipRequest = new PlaceShipRequest();
 				shipRequest.ShipType = s;
-				ConsoleInput.ShipToPlace(shipRequest.ShipType);
-                shipRequest.Coordinate = ConsoleOutput.GetCoordinate();
-                shipRequest.Direction = ConsoleOutput.GetDirection();
+                ConsoleOutput.ShipToPlace(shipRequest.ShipType);
+                shipRequest.Coordinate = ConsoleInput.GetCoordinate();
+                shipRequest.Direction = ConsoleInput.GetDirection();
                 ShipPlacement shipPlaced = gameBoard.PlaceShip(shipRequest);
 
                 switch(shipPlaced)
 				{
                     case ShipPlacement.Overlap:
-                        ConsoleInput.ShipOverlappedAlert(shipRequest.ShipType);
+                        ConsoleOutput.ShipOverlappedAlert(shipRequest.ShipType);
                         s++;
                         break;
                     case ShipPlacement.NotEnoughSpace:
-                        ConsoleInput.ShipNoSpaceAlert(shipRequest.ShipType);
+                        ConsoleOutput.ShipNoSpaceAlert(shipRequest.ShipType);
                         s++;
                         break;
                 }

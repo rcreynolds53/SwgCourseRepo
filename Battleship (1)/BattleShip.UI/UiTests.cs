@@ -14,7 +14,7 @@ namespace BattleShip.UI
         public void InputToCoordinate()
         {
             string userCoordinate = "a10";
-            Coordinate actual = ConsoleOutput.GetCoordinate(userCoordinate);
+            Coordinate actual = ConsoleInput.GetCoordinate(userCoordinate);
             Coordinate coordinate = new Coordinate(1, 10);
 
 
@@ -24,7 +24,7 @@ namespace BattleShip.UI
         public void IsCoordinateValid()
         {
             string userCoordinate = "";
-            Coordinate actual = ConsoleOutput.GetCoordinate(userCoordinate);
+            Coordinate actual = ConsoleInput.GetCoordinate(userCoordinate);
             Coordinate coordinate = null;
             Assert.AreEqual(coordinate, actual);
 
@@ -33,7 +33,7 @@ namespace BattleShip.UI
         public void ValidateDirection()
         {
             string userDirection = "e";
-            bool actual = ConsoleOutput.IsDirectionValid(userDirection);
+            bool actual = ConsoleInput.IsDirectionValid(userDirection);
             bool isValid = false;
 
             Assert.AreEqual(isValid, actual);
@@ -42,7 +42,7 @@ namespace BattleShip.UI
         public void InvalidDirection()
         {
             string userDirection = "d";
-            ShipDirection actual = ConsoleOutput.GetDirection(userDirection);
+            ShipDirection actual = ConsoleInput.GetDirection(userDirection);
             ShipDirection direction = ShipDirection.Down;
 
             Assert.AreEqual(direction, actual);

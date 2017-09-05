@@ -30,14 +30,14 @@ namespace BattleShip.UI
             */
             while (lastShot != ShotStatus.Victory)
             {
-                ConsoleOutput.DrawBoard(state);
+                ConsoleInput.DrawBoard(state);
                 // prompt user for coordinate 
                 lastShot = FireShot(state);
                 if (lastShot == ShotStatus.Duplicate || lastShot == ShotStatus.Invalid)
                     continue;
                 //ConsoleOutput.DrawBoard(state);
                 state.IsPlayer1Turn = !state.IsPlayer1Turn;
-                ConsoleInput.ToNextTurn();
+                ConsoleOutput.ToNextTurn();
             }
 
         }
@@ -48,33 +48,33 @@ namespace BattleShip.UI
             // ShipType ship = ShipType.Battleship;
             Board toFire = state.IsPlayer1Turn ? state.P2.PlayerBoard : state.P1.PlayerBoard;
             ShotStatus isVictory = ShotStatus.Miss;
-            Coordinate FireAt = ConsoleOutput.GetCoordinate();
+            Coordinate FireAt = ConsoleInput.GetCoordinate();
             FireShotResponse response = toFire.FireShot(FireAt);
 
             switch (response.ShotStatus)
             {
                 case ShotStatus.Invalid:
-                    ConsoleInput.IvalidResponse();
+                    ConsoleOutput.IvalidResponse();
                     isVictory = ShotStatus.Invalid;
                     return isVictory;
                 case ShotStatus.Duplicate:
-                    ConsoleInput.DuplicateResponse();
+                    ConsoleOutput.DuplicateResponse();
                     isVictory = ShotStatus.Duplicate;
                     return isVictory;
                 case ShotStatus.Hit:
-                    ConsoleInput.HitResponse();
+                    ConsoleOutput.HitResponse();
                     isVictory = ShotStatus.Hit;
                     return isVictory;
                 case ShotStatus.HitAndSunk:
-                    ConsoleInput.HitAndSunkResponse(response.ShipImpacted);
+                    ConsoleOutput.HitAndSunkResponse(response.ShipImpacted);
                     isVictory = ShotStatus.HitAndSunk;
                     return isVictory;
                 case ShotStatus.Miss:
-                    ConsoleInput.MissResponse();
+                    ConsoleOutput.MissResponse();
                     isVictory = ShotStatus.Miss;
                     return isVictory;
                 case ShotStatus.Victory:
-                    ConsoleInput.VictoryResponse();
+                    ConsoleOutput.VictoryResponse();
 					isVictory = ShotStatus.Victory;
 					return isVictory;
             }

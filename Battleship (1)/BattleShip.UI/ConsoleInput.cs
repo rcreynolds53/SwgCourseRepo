@@ -1,166 +1,229 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BattleShip.BLL;
 using BattleShip.BLL.GameLogic;
-using BattleShip.BLL.Ships;
 using BattleShip.BLL.Responses;
 using BattleShip.BLL.Requests;
+using System.Diagnostics.Contracts;
+
 namespace BattleShip.UI
 {
-    public class ConsoleInput
-    {
-        public static string GetName(int playernumber)
-        {
-            // for now just have their input be their name, but later one make it so that it must include a string of letters. 
-            Console.WriteLine($"Welcome to Battleship! Player {playernumber} please start by entering your name.");
-            return Console.ReadLine();
-        }
-
-        internal static void DisplaySplash()
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(@"                                     ``        :++`            `       `                            
-        `        `                             --++-                   :       `          `       ` 
-                                               -::/:/.              `--/:-                          
-                     ``              `         --:`:`-:`      `.-:/++/+/++                          
-                                               -`/ `:``:-`   -++/:-..`.+::                  `       
-                                               - `/ .:  .-:--+/-:.-//:/:.`                          
- `                                             -  :-`--    `:--::-+-://`:          `                
-                               `.-.            -  `--.:-   .:::/::://-..-..`                        
-                            `--.`  -           -   : .-+::---///--::.- -.. -                      ` 
-                `            :  ````-      `.-:-::.+:-:--://---//:.`---.--.-`                       
-                             `/....`..     .---//-::.---::---:/:.`..-`.  ::-...                     
-                              `.  .`.-.    `:./://--/+-:---` -:.``..:.. `-/..`                      
-                               ..  - -:..--:::.::/::/. `..:.-.`.`.-:```.:` ..                       
-                                -`.`. .:://:-:-`/++-`:-` ..:`   .-- `-:-                            
-            `.--                .:-.`//:/--:/-/+:-`--``:--:`` .`.`  :-`                             
-o`      `.--.`` -              `../:-.--:/:.///- --`---:  .```..   ..                               
-o+.     /`  . `.`-        ..  `.-.-:---:-:::--`--.-:..-.`` ...`   .`                                
-.o//    `:   ....`-       --:///:.:-...//-:.  -..-:...`.` ---   ..                                  
- :+//.   `-..`   ``:    .--++:.:-:-:`::::-` - .--... .`  -.`   .`                                   
-  -o---`  `.`  `  ..- -/:-//.--:`..-.-:-...` ---`. `-  `-.   `.                                     
-  ../-.:-` `-..``   `:-.:-.`:-.-.--.:. . `-.--:-` .` `:-    .`          .-                          
-   -`+:`-...`:.-  `  `:::-:---..: :.`.. -.-.-:` `.  .-`   `-          `-` :                         
-    -.-/``-`.:-.. ```--.--.-..:`--````-`..     .```..    -.--        .-   `-.                       
-    ..-`/. .-`//:/--:``--...:`-.` `..`.-`    .` ...`   `:``  .-   -...`..`..`-.     ``              
-     --  :+-:+:-`/:::-:-.-:-:. .. -..:-.   `` ``..    .-  `..  --.. .-......:- .--..``...           
-   `.::``./+:-/-.-:/...---:.` - `` -..``    ``..     :`      ..  .-.   ``           .... :``        
-  `-` s/---./:.-.-/..-:::. ..`.``.-.-  ```  `-.    .-`.````````````````````.-.-............-::...`` 
-.`/`-/::/+:/+:-`:-..:::```. .-`-..``  .` . --     --.```````.`.             .``````          .. ``` 
-` /-:. /:::-://..--::` -`.` .--`-    `   `-`    `:``....``   .-`````              -     ..```    ```
-.-.-..-/...`-.````..```.``-`--```````````.``````.````   `.`         `.`-`        -      `.         `
-```````   ``.``..  ``.`-...`````-``````. `.```````.``````       `   `````    ````            `````  
-`      ```.` ```..                      ``                   ```-    ``                `.`      `.  
-```.``.````.`.`           .``.`...` ```.`````..`.    .` ````.`   .-`.s/ ..  oo  ` ./-     `         
-            -`.``:-    +. -`````` ````  ````     ````         :/`::os+/:oy.:+/:.+---+`   -./+:      
-    `/-.`  ./--:.//.oo-oo//`:. ....-....`..`..``````        `:s+ssooooys/s+o:o+ss+/-/o.`-++:oo/`.   
-   -o+/o/-:+:/osoo/+s+ssooso+o-..`.```   `          ```````:oooso+ss++.++s//oo+o-:-/os/sysoh:+os-s` 
-`. :o:yoso/so.-/:+:o+o:/+syo+so/     -```-`````````````    /+oy+osh+o/:os+s:+y-yo.`:y/os//oo/o/ysso 
-:+////o+:ssoy:/+oy+++o+o//s/os+/ ```                     `./+sos/:o:/oy+o//:oso+///os+s//:+++/:///o 
--/ .---::.:.::-::/--//-://::--+......```          ```.---.``::..:////-.-::-:-::--.-/----//:..... :+ 
-./`  `   .-` `-.``.-`.:....-```....`.```..-` ``.-.```.````````.`--..`.::-.-:-``.--` ..:-`  `.`   :+ 
-.::` `.```.```..-.-..`    ````    ```````   ````   `````````` ```.`````` `....```````.---.::----::-`");
-            Console.ReadKey();
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
-        internal static void VictoryResponse()
-        {
-            
-            Console.WriteLine($"Contragulations! You have won the game by sinking all of the opponents ships.!");
-            Console.ReadLine();
-        }
-
-        internal static void ShipToPlace(ShipType shipType)
-        {
-            Console.WriteLine($"You are placing your {shipType}.");
-        }
-
-        internal static void ShipNoSpaceAlert(ShipType shipType)
-        {
-            Console.WriteLine($"Error, there is not enough space on the board for you to place your {shipType} on that coordinate in that direction. Please try again.");
-			Console.ReadLine();
-        }
-
-        internal static void ShipOverlappedAlert(ShipType shipType)
-        {
-            Console.WriteLine($"Error, your {shipType} was unable to be placed since it is overlapping with another ship. Please try again.");
-            Console.ReadLine();
-        }
-
-        internal static void PlayAgainPrompt()
-        {
-            Console.WriteLine("Would you like a rematch> \n Press Y to play again, otherwise press any other key to exit Battleship.");
-        }
-
-        internal static void HitAndSunkResponse(string shipImpacted)
-        {
-            Console.WriteLine($"You have hit and sunk the opponents {shipImpacted}!");
-            Console.ReadLine();
-        }
-
-        internal static void IvalidResponse()
-        {
-			Console.WriteLine($"Please enter a valid coordinate to attack!");
-            Console.ReadLine();
-		}
-
-        internal static void VictoryResponse(string name)
-        {
-            Console.WriteLine($"Contragulations {name}! You have won the game!");
-			Console.ReadLine();
-
-		}
-
-        internal static void HitResponse()
-        {
-            Console.WriteLine("Hit!");
-			Console.ReadLine();
-
-		}
-
-        internal static void MissResponse()
-        {
-            Console.WriteLine("Miss!");
-			Console.ReadLine();
-
-		}
-
-        internal static void DuplicateResponse()
-        {
-			Console.WriteLine("You already entered that coordinate, please reenter a coordinate.");
-			Console.ReadLine();
-
-		}
-
-        internal static void ToNextTurn()
-        {
-            Console.WriteLine("Please press any key to continue...");
-            Console.Clear();
-        }
-
-        internal static void WhoBuilds(Player name)
-        {
-            Console.WriteLine($"{name.Name}, it is your turn.");
-		}
-
-        public static void WhoseTurn(Player player)
+	internal class ConsoleInput
+	{
+		public static Board DrawBoard(GameState state)
 		{
-			Console.WriteLine($"{player.Name}, it is your turn.");
+			//Coordinate coordToCheck = new Coordinate();
+			Board toDraw = state.IsPlayer1Turn ? state.P2.PlayerBoard : state.P1.PlayerBoard;
+			if (!state.IsPlayer1Turn)
+			{
+                ConsoleOutput.WhoseTurn(state.P2);
+			}
+			else
+			{
+                ConsoleOutput.WhoseTurn(state.P1);
+			}
+			for (int y = 1; y < 11; y++)
+			{
+				for (int x = 1; x < 11; x++)
+				{
+					ShotHistory currentHistory = toDraw.CheckCoordinate(new Coordinate(y, x));
+					switch (currentHistory)
+					{
+						case ShotHistory.Unknown:
+							Console.Write(" ");
+							break;
+						case ShotHistory.Hit:
+							Console.ForegroundColor = ConsoleColor.Red;
+							Console.Write("H");
+							Console.ResetColor();
+							break;
+						case ShotHistory.Miss:
+							Console.ForegroundColor = ConsoleColor.DarkYellow;
+							Console.Write("M");
+							Console.ResetColor();
+							break;
+					}
+					Console.Write(" | ");
+
+				}
+				Console.WriteLine();
+				Console.WriteLine("---------------------------------------");
+			}
+			return toDraw;
 		}
 
-		internal static void PromptPlayerForCoordinate()
+		internal static bool PlayAgain()
 		{
-			Console.WriteLine("Please enter a coordinate from a1 to j10: ");
+			string wantToPlay = "";
+			bool gameOVer = false;
+			while (!gameOVer)
+			{
+                ConsoleOutput.PlayAgainPrompt();
+				wantToPlay = Console.ReadLine();
+
+				if (wantToPlay == "")
+					continue;
+				else if (wantToPlay == "Y" || wantToPlay == "y")
+				{
+					gameOVer = false;
+					return gameOVer;
+				}
+				else
+				{
+					gameOVer = true;
+					return gameOVer;
+				}
+			}
+			return gameOVer;
 		}
 
-		internal static void PromptForDirection()
+		internal static ShipDirection GetDirection()
 		{
-			Console.WriteLine("Please enter the uppercase letter that corresponds to the direction you want to place your ship.\n U = Up   D = Down   L = Left   R = Right \n");
+			ShipDirection toReturn = ShipDirection.Up;
+			bool isValidDirection = false;
+			while (!isValidDirection)
+			{
+				Console.ForegroundColor = ConsoleColor.White;
+                ConsoleOutput.PromptForDirection();
+				string userDirection = Console.ReadLine().ToUpper();
+				if (userDirection == "")
+					continue;
+
+				switch (userDirection)
+				{
+					case "U":
+						toReturn = ShipDirection.Up;
+						isValidDirection = true;
+						break;
+					case "D":
+						toReturn = ShipDirection.Down;
+						isValidDirection = true;
+						break;
+					case "L":
+						toReturn = ShipDirection.Left;
+						isValidDirection = true;
+						break;
+					case "R":
+						toReturn = ShipDirection.Right;
+						isValidDirection = true;
+						break;
+				}
+			}
+
+			return toReturn;
 		}
 
-    }
+		public static Coordinate GetCoordinate()
+		{
+			Coordinate toReturn = null;
+
+			bool isValidInput = false;
+			//ConsoleInput.PromptPlayerForCoordinate();
+
+			while (!isValidInput)
+			{
+                ConsoleOutput.PromptPlayerForCoordinate();
+
+				string userCoordinate = Console.ReadLine();
+
+				int CordX = 0;
+				if (userCoordinate == "" || userCoordinate.Length < 2)
+					continue;
+				char yPart = userCoordinate[0];
+				int y = (yPart - 'a' + 1);
+				string x = userCoordinate.Substring(1);
+				bool canParse = int.TryParse(x, out CordX);
+				if (canParse && (CordX > 0 && CordX < 11) && (y > 0 && y < 11))
+				{
+					toReturn = new Coordinate(y, CordX);
+					isValidInput = true;
+				}
+				//Console.ForegroundColor = ConsoleColor.Red;
+			}
+			return toReturn;
+		}
+		public static Coordinate GetCoordinate(string userCoordinate)
+		{
+			Coordinate toReturn = null;
+
+			bool isValidInput = false;
+			//ConsoleInput.PromptPlayerForCoordinate();
+			while (!isValidInput)
+			{
+				if (userCoordinate == "" || userCoordinate.Length < 2)
+					break;
+				int CordX = 0;
+				char yPart = userCoordinate[0];
+				int y = (yPart - 'a' + 1);
+				string x = userCoordinate.Substring(1);
+				bool canParse = int.TryParse(x, out CordX);
+				if (canParse && (CordX > 0 && CordX < 11) && (y > 0 && y < 11))
+				{
+					toReturn = new Coordinate(y, CordX);
+					isValidInput = true;
+				}
+			}
+			//Console.ForegroundColor = ConsoleColor.Red;
+			return toReturn;
+		}
+		internal static bool IsDirectionValid(string userDirection)
+		{
+			bool isValidDirection = false;
+			while (!isValidDirection)
+			{
+				if (userDirection == "")
+					break;
+
+				switch (userDirection.ToUpper())
+				{
+					case "U":
+						isValidDirection = true;
+						break;
+					case "D":
+						isValidDirection = true;
+						break;
+					case "L":
+						isValidDirection = true;
+						break;
+					case "R":
+						isValidDirection = true;
+						break;
+				}
+				return isValidDirection;
+			}
+
+			return isValidDirection;
+		}
+		internal static ShipDirection GetDirection(string userDirection)
+		{
+			ShipDirection toReturn = ShipDirection.Up;
+			bool isValidDirection = false;
+			while (!isValidDirection)
+			{
+				if (userDirection == "")
+					break;
+
+				switch (userDirection.ToUpper())
+				{
+					case "U":
+						toReturn = ShipDirection.Up;
+						isValidDirection = true;
+						break;
+					case "D":
+						toReturn = ShipDirection.Down;
+						isValidDirection = true;
+						break;
+					case "L":
+						toReturn = ShipDirection.Left;
+						isValidDirection = true;
+						break;
+					case "R":
+						toReturn = ShipDirection.Right;
+						isValidDirection = true;
+						break;
+				}
+			}
+
+			return toReturn;
+		}
+	}
 }

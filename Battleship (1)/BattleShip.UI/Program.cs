@@ -17,7 +17,7 @@ namespace BattleShip.UI
                 Gameflow game = new Gameflow();
                 GameState state = infoAndBoardSetup.SetupPlayersBoard();
                 game.PlayGame(state);
-                isGameOver = ConsoleOutput.PlayAgain();
+                isGameOver = ConsoleInput.PlayAgain();
             }
 
         }
