@@ -25,7 +25,7 @@ namespace BattleShip.UI
             {
 				for (int x = 1; x < 11; x++)
                 {
-                    ShotHistory currentHistory = toDraw.CheckCoordinate(new Coordinate(x, y));
+                    ShotHistory currentHistory = toDraw.CheckCoordinate(new Coordinate(y, x));
 					switch (currentHistory)
                     {
                         case ShotHistory.Unknown:
@@ -85,7 +85,7 @@ namespace BattleShip.UI
 			{
 				Console.ForegroundColor = ConsoleColor.White;
 				ConsoleInput.PromptForDirection();
-				string userDirection = Console.ReadLine();
+                string userDirection = Console.ReadLine().ToUpper();
                 if (userDirection == "")
                     continue;
 
@@ -124,7 +124,7 @@ namespace BattleShip.UI
 			{
 				ConsoleInput.PromptPlayerForCoordinate();
 
-				string userCoordinate = Console.ReadLine();
+                string userCoordinate = Console.ReadLine();
 
 				int CordX = 0;
                 if (userCoordinate == "" || userCoordinate.Length < 2)
@@ -135,12 +135,96 @@ namespace BattleShip.UI
 				bool canParse = int.TryParse(x, out CordX);
                 if (canParse && (CordX > 0 && CordX < 11) && (y > 0 && y < 11))
 				{
-					toReturn = new Coordinate(y, CordX);
+                    toReturn = new Coordinate(y, CordX);
 					isValidInput = true;
 				}
                 //Console.ForegroundColor = ConsoleColor.Red;
 			}
 			return toReturn;
+		}
+        public static Coordinate GetCoordinate(string userCoordinate)
+        {
+            Coordinate toReturn = null;
+
+            bool isValidInput = false;
+            //ConsoleInput.PromptPlayerForCoordinate();
+            while (!isValidInput)
+            {
+                if (userCoordinate == "" || userCoordinate.Length < 2)
+                    break;
+                int CordX = 0;
+                char yPart = userCoordinate[0];
+                int y = (yPart - 'a' + 1);
+                string x = userCoordinate.Substring(1);
+                bool canParse = int.TryParse(x, out CordX);
+                if (canParse && (CordX > 0 && CordX < 11) && (y > 0 && y < 11))
+                {
+                    toReturn = new Coordinate(y, CordX);
+                    isValidInput = true;
+                }
+            }
+            //Console.ForegroundColor = ConsoleColor.Red;
+            return toReturn;
+        }
+		internal static bool IsDirectionValid(string userDirection)
+		{
+			bool isValidDirection = false;
+			while (!isValidDirection)
+			{
+				if (userDirection == "")
+					break;
+
+                switch (userDirection.ToUpper())
+				{
+					case "U":
+						isValidDirection = true;
+						break;
+					case "D":
+						isValidDirection = true;
+						break;
+					case "L":
+						isValidDirection = true;
+						break;
+					case "R":
+						isValidDirection = true;
+						break;
+				}
+                return isValidDirection;
+			}
+
+            return isValidDirection;
+		}
+        internal static ShipDirection GetDirection(string userDirection)
+		{
+			ShipDirection toReturn = ShipDirection.Up;
+			bool isValidDirection = false;
+			while (!isValidDirection)
+			{
+				if (userDirection == "")
+					break;
+
+				switch (userDirection.ToUpper())
+				{
+					case "U":
+						toReturn = ShipDirection.Up;
+						isValidDirection = true;
+						break;
+					case "D":
+						toReturn = ShipDirection.Down;
+						isValidDirection = true;
+						break;
+					case "L":
+						toReturn = ShipDirection.Left;
+						isValidDirection = true;
+						break;
+					case "R":
+						toReturn = ShipDirection.Right;
+						isValidDirection = true;
+						break;
+				}
+			}
+
+            return toReturn;
 		}
     }
 }
