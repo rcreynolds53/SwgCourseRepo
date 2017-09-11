@@ -40,7 +40,7 @@ namespace LINQ
             //Exercise28();
             //Exercise29();
             //Exercise30();
-            //Exercise31();
+            Exercise31();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
@@ -304,8 +304,8 @@ namespace LINQ
         /// </summary>
         static void Exercise11()
         {
-            var FirstThreeOdd = DataLoader.NumbersC.Where(num => num % 2 == 1).Take(3);
-            foreach(var num in FirstThreeOdd)
+            var firstThreeOdd = DataLoader.NumbersC.Where(num => num % 2 == 1).Take(3);
+            foreach(var num in firstThreeOdd)
             {
                 Console.WriteLine(num);
             }
@@ -329,7 +329,7 @@ namespace LINQ
         /// </summary>
         static void Exercise13()
         {
-			var InWash= from customer in DataLoader.LoadCustomers().Where(cust => cust.Region == "WA")
+            var inWash= from customer in DataLoader.LoadCustomers().Where(cust => cust.Region == "WA")
 									select new
 									{
 										CompanyName = customer.CompanyName,
@@ -338,7 +338,7 @@ namespace LINQ
 
 			Console.WriteLine("{0,-35} {1,-15}", "Company Name", "First Order");
 			Console.WriteLine("===========================================");
-			foreach (var cust in InWash)
+			foreach (var cust in inWash)
 			{
                 Console.WriteLine("{0,-35} {1,-15}", cust.CompanyName, cust.FirstOrder.OrderID);
 			}
@@ -373,9 +373,9 @@ namespace LINQ
         /// </summary>
         static void Exercise16()
         {
-            var ProductsOrdered = DataLoader.LoadProducts().OrderBy(p => p.ProductName);
+            var productsOrdered = DataLoader.LoadProducts().OrderBy(p => p.ProductName);
 
-            foreach(var p in ProductsOrdered)
+            foreach(var p in productsOrdered)
             {
                 Console.WriteLine(p.ProductName);
             }
@@ -386,7 +386,7 @@ namespace LINQ
         /// </summary>
         static void Exercise17()
         {
-            var ProductsByReverseStock = from product in DataLoader.LoadProducts().OrderByDescending(p => p.UnitsInStock)
+            var productsByReverseStock = from product in DataLoader.LoadProducts().OrderByDescending(p => p.UnitsInStock)
                                          select new
                                          {
                                              productName = product.ProductName,
@@ -395,7 +395,7 @@ namespace LINQ
                                          };
             Console.WriteLine("{0,-35} {1,20}", "Product Name", "Units in Stock");
             Console.WriteLine("========================================================");
-            foreach(var p in ProductsByReverseStock)
+            foreach(var p in productsByReverseStock)
             {
                 Console.WriteLine("{0,-35} {1,20}", p.productName, p.unitsInStock);
 
@@ -408,7 +408,7 @@ namespace LINQ
         /// </summary>
         static void Exercise18()
         {
-            var ProductsByCat = from product in DataLoader.LoadProducts().OrderBy(p => p.Category).ThenByDescending(p => p.UnitPrice)
+            var productsByCat = from product in DataLoader.LoadProducts().OrderBy(p => p.Category).ThenByDescending(p => p.UnitPrice)
                                 select new
                                 {
                                     PName = product.ProductName,
@@ -418,7 +418,7 @@ namespace LINQ
             Console.WriteLine("{0,-35} {1,20} {2,20}", "Product Name", "Category", "Unit Price");
 			Console.WriteLine("=============================================================================");
 
-            foreach(var p in ProductsByCat)
+            foreach(var p in productsByCat)
             {
                 Console.WriteLine("{0,-35} {1,20} {2,20}", p.PName, p.PCat, p.PUnitPrice);
             }
@@ -429,8 +429,8 @@ namespace LINQ
         /// </summary>
         static void Exercise19()
         {
-            var ReverseNumbersB = DataLoader.NumbersB.Reverse();
-            foreach(var num in ReverseNumbersB)
+            var reverseNumbersB = DataLoader.NumbersB.Reverse();
+            foreach(var num in reverseNumbersB)
                 Console.WriteLine(num);
         }
 
@@ -523,7 +523,7 @@ namespace LINQ
 			Console.WriteLine($"Product id 789 is {prodExist.ProductName}.");
 
             //this works as well. 
-			var prodExists = DataLoader.LoadProducts().Any(p => p.ProductID == 789) ? true : false;
+            var prodExists = DataLoader.LoadProducts().Any(p => p.ProductID == 789);
 
 
 }
