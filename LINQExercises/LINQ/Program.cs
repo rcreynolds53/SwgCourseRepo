@@ -41,8 +41,6 @@ namespace LINQ
             //Exercise29();
             //Exercise30();
             //Exercise31();
-
-
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
@@ -665,10 +663,6 @@ namespace LINQ
 			//            Console.WriteLine(p.Key);
 			//   Console.WriteLine($"Lowest Prices Product is {} ${p.Min(prod=>prod.UnitPrice)}");
 			//Console.WriteLine();
-
-
-
-
 			//         var groupProducts = from product in DataLoader.LoadProducts()
 			//                             group product by product.Category into newGroup
 			//                             select newGroup;
