@@ -32,10 +32,10 @@ namespace LINQ
             //Exercise19();
             //Exercise20();
             //Exercise22();
-            Exercise23();
+            //Exercise23();
             //Exercise24();
             //Exercise25();
-           //Exercise26();
+            //Exercise26();
             //Exercise27();
             //Exercise28();
             //Exercise29();
@@ -625,7 +625,6 @@ namespace LINQ
                 Console.WriteLine("Total Units In Stock: " + product.Sum(p=>p.UnitsInStock));
 				Console.WriteLine();
 
-
 			}
 		}
 
@@ -634,16 +633,54 @@ namespace LINQ
         /// </summary>
         static void Exercise30()
         {
-            var categories = DataLoader.LoadProducts().GroupBy(c => c.Category);
+            var categories = from categoryGroup in DataLoader.LoadProducts().GroupBy(c => c.Category)
+                             select new
+                             {
 
-            foreach(var p in categories)
+                                 ProdName = categoryGroup.OrderBy(prod => prod.UnitPrice).First(),
+                                 CCat = categoryGroup.Key,
+                                 CMin = categoryGroup.Min(prod => prod.UnitPrice)
+
+                             };
+
+            Console.WriteLine("{0,-30} {1,15} {2,15}", "Product Name", "Category", "Unit Price");
+			Console.WriteLine("====================================================");
+            foreach (var c in categories)
             {
-                Console.WriteLine(p.Key);
-                Console.WriteLine("Lowest Prices Product: $" + p.Min(prod=>prod.UnitPrice));
-				Console.WriteLine();
+                Console.WriteLine("{0,-30} {1,15} {2,15}", c.ProdName.ProductName, c.CCat, c.CMin);
+            }
+            // method syntax below
 
-			}
-        }
+			//var test = DataLoader.LoadProducts().GroupBy(c => c.Category).Select(categoryGroup => new
+			//{
+
+			//    ProdName = categoryGroup.OrderBy(prod => prod.UnitPrice).First(),
+			//    CCat = categoryGroup.Key,
+			//    CMin = categoryGroup.Min(prod => prod.UnitPrice)
+
+			//});
+
+			//foreach(var p in categories)
+			//        {
+			//            Console.WriteLine(p.Key);
+			//   Console.WriteLine($"Lowest Prices Product is {} ${p.Min(prod=>prod.UnitPrice)}");
+			//Console.WriteLine();
+
+
+
+
+			//         var groupProducts = from product in DataLoader.LoadProducts()
+			//                             group product by product.Category into newGroup
+			//                             select newGroup;
+			//         foreach (var p in groupProducts)
+			//{
+			//	Console.WriteLine(p.Key);
+			//             Console.WriteLine("Lowest Prices Product is: $" + p.Min(prod => prod.UnitPrice));
+			//	Console.WriteLine();
+			//}
+
+
+		}
 
         /// <summary>
         /// Print the top 3 categories by the average unit price of their products
