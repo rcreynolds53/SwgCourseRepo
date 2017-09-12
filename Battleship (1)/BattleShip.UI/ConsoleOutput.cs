@@ -11,11 +11,12 @@ namespace BattleShip.UI
 {
 	public class ConsoleOutput
 	{
-		public static string GetName(int playernumber)
+		public static void GetName(int playernumber)
 		{
+            
 			// for now just have their input be their name, but later one make it so that it must include a string of letters. 
 			Console.WriteLine($"Welcome to Battleship! Player {playernumber} please start by entering your name.");
-			return Console.ReadLine();
+
 		}
 
 		internal static void DisplaySplash()
@@ -91,7 +92,12 @@ o+.     /`  . `.`-        ..  `.-.-:---:-:::--`--.-:..-.`` ...`   .`
 			Console.ReadLine();
 		}
 
-		internal static void PlayAgainPrompt()
+        internal static void InvalidUserName()
+        {
+            Console.WriteLine("You must enter a valid name.");
+        }
+
+        internal static void PlayAgainPrompt()
 		{
 			Console.WriteLine("Would you like a rematch> \n Press Y to play again, otherwise press any other key to exit Battleship.");
 		}

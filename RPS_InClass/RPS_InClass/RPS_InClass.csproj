@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{6DC95ACD-1776-44E4-821C-D27F6D83435E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RPS_InClass</RootNamespace>
+    <AssemblyName>RPS_InClass</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RPSChoice.cs" />
+    <Compile Include="IRPSPlayer.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="ComputerPlayers\RandomPlayer.cs" />
+    <Compile Include="ComputerPlayers\AlwaysRock.cs" />
+    <Compile Include="ComputerPlayers\AlwaysPaper.cs" />
+    <Compile Include="ComputerPlayers\AlwaysScissors.cs" />
+    <Compile Include="ComputerPlayers\BiasedPlayer.cs" />
+    <Compile Include="HumanPlayers\HumanPlayer.cs" />
+    <Compile Include="ConsoleInput.cs" />
+    <Compile Include="ConsoleOutput.cs" />
+    <Compile Include="RPSResult.cs" />
+    <Compile Include="Arena.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ComputerPlayers\" />
+    <Folder Include="HumanPlayers\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

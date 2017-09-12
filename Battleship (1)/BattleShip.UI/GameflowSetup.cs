@@ -15,11 +15,11 @@ namespace BattleShip.UI
         public GameState SetupPlayersBoard()
         {
             ConsoleOutput.DisplaySplash();
-            string p1 = ConsoleOutput.GetName(1);
+            string p1 = ConsoleInput.ValidateUserName(1);
             //string p2 = ConsoleInput.GetName(2);                      
             //skipping over instantiating the board for now 
             Board b1 = BuildBoard(p1);
-            string p2 = ConsoleOutput.GetName(2);
+            string p2 = ConsoleInput.ValidateUserName(2);
 
 			Board b2 = BuildBoard(p2);
 			Player player1 = new Player(p1,b1);

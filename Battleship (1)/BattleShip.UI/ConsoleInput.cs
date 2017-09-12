@@ -225,5 +225,25 @@ namespace BattleShip.UI
 
 			return toReturn;
 		}
+
+		public static string ValidateUserName(int playernumber)
+        {
+
+            string input = null;
+            while (true)
+            {
+                ConsoleOutput.GetName(playernumber);
+                input = Console.ReadLine();
+
+                if(input == "" || input.Length < 2)
+                {
+                    ConsoleOutput.InvalidUserName();
+                    continue;
+                }
+                break;
+
+            }
+            return input;
+        }
 	}
 }
