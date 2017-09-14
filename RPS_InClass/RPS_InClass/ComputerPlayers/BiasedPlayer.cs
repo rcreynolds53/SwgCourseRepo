@@ -9,7 +9,22 @@ namespace RPS_InClass.ComputerPlayers
 
         public override RPSChoice GetChoice()
         {
-            return RPSChoice.Nuke;
+            Random rng = new Random();
+            rng.Next(1, 101);
+
+            if (rng.Next(1, 101) > 40)
+            {
+                return RPSChoice.Rock;
+
+            }
+            else if (rng.Next(1, 101) > 20)
+            {
+                return RPSChoice.Paper;
+            }
+            else
+            {
+                return RPSChoice.Scissors;
+            }
         }
     }
 }

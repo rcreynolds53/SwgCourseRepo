@@ -23,11 +23,11 @@ namespace RPS_InClass
 			Console.WriteLine($"Congrats {p2.PlayerName} you have won!");
 		}
 
-        internal static void P1NukedMessage(IRPSPlayer p1)
-        {
-            Console.WriteLine("");
-            Console.WriteLine($"{p1.PlayerName}, it looks like you have been nuked.");
+        //internal static void P1NukedMessage(IRPSPlayer p1)
+        //{
+        //    Console.WriteLine("");
+        //    Console.WriteLine($"{p1.PlayerName}, it looks like you have been nuked.");
 
-        }
+        //}
     }
 }

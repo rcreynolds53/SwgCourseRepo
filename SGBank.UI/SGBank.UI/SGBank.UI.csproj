@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{6DC95ACD-1776-44E4-821C-D27F6D83435E}</ProjectGuid>
+    <ProjectGuid>{A9479C4D-847E-4D60-9108-FC94EBBBB3F4}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>RPS_InClass</RootNamespace>
-    <AssemblyName>RPS_InClass</AssemblyName>
+    <RootNamespace>SGBank.UI</RootNamespace>
+    <AssemblyName>SGBank.UI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -30,36 +30,30 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RPSChoice.cs" />
-    <Compile Include="IRPSPlayer.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="ComputerPlayers\RandomPlayer.cs" />
-    <Compile Include="ComputerPlayers\AlwaysRock.cs" />
-    <Compile Include="ComputerPlayers\AlwaysPaper.cs" />
-    <Compile Include="ComputerPlayers\AlwaysScissors.cs" />
-    <Compile Include="ComputerPlayers\BiasedPlayer.cs" />
-    <Compile Include="HumanPlayers\HumanPlayer.cs" />
-    <Compile Include="ConsoleInput.cs" />
-    <Compile Include="ConsoleOutput.cs" />
-    <Compile Include="RPSResult.cs" />
-    <Compile Include="Arena.cs" />
-    <Compile Include="DIContainer.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="Workflows\AccountLookupWorkflow.cs" />
+    <Compile Include="ConsoleIO.cs" />
+    <Compile Include="Workflows\DepositWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ComputerPlayers\" />
-    <Folder Include="HumanPlayers\" />
+    <ProjectReference Include="..\SGBank.Models\SGBank.Models.csproj">
+      <Project>{0916E6B5-FB89-4F58-9CB9-8277C2B2BD65}</Project>
+      <Name>SGBank.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SGBank.BLL\SGBank.BLL.csproj">
+      <Project>{4AFB8042-95A0-45DD-A2C5-48F4AC9639D8}</Project>
+      <Name>SGBank.BLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="bin\Debug\RPS_InClass.exe.config" />
+    <Folder Include="Workflows\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

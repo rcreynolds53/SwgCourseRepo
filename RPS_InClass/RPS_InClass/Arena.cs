@@ -1,8 +1,22 @@
 ﻿using System;
+using Ninject;
+using RPS_InClass.HumanPlayers;
+
 namespace RPS_InClass
 {
     public class Arena
     {
+        private IRPSPlayer _player;
+        public Arena(IRPSPlayer player)
+        {
+            _player = player;      
+        }
+
+        public void PlayAgainstComputer()
+        {
+            HumanPlayer human = new HumanPlayer(ConsoleInput.GetPlayerName());
+            PlayGame(human, _player);
+        }
         public void PlayGame(IRPSPlayer p1, IRPSPlayer p2)
         {
             RPSChoice p1Choice = p1.GetChoice();
@@ -18,10 +32,10 @@ namespace RPS_InClass
             {
                 ConsoleOutput.P1WinMessage(p1);
 			}
-            else if(p2Choice == RPSChoice.Nuke)
-            {
-                ConsoleOutput.P1NukedMessage(p1);
-            }
+            //else if(p2Choice == RPSChoice.Nuke)
+            //{
+            //    ConsoleOutput.P1NukedMessage(p1);
+            //}
             else
             {
 				ConsoleOutput.P2WinMessage(p2);

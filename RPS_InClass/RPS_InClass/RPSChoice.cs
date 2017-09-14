@@ -6,6 +6,5 @@ namespace RPS_InClass
         Rock,
         Paper,
         Scissors,
-        Nuke
     }
 }
