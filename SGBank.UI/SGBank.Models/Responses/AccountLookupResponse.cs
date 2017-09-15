@@ -9,9 +9,5 @@ namespace SGBank.Models.Responses
             get;
             set;
         }
-
-        public AccountLookupResponse()
-        {
-        }
     }
 }

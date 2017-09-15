@@ -4,48 +4,42 @@ using SGBank.Models.Responses;
 
 namespace SGBank.UI.Workflows
 {
-    public class DepositWorkflow
+    public class WithdrawWorkflow
     {
        public void Execute()
         {
             AccountManager accountManager = AccountManagerFactory.Create();
-
             Console.WriteLine("Enter an account number: ");
             string accountNumber = Console.ReadLine();
-
             decimal amount;
 
-            while(true)
+            while (true)
             {
-				Console.WriteLine("Enter a deposit amount: ");
-
-				if(!decimal.TryParse(Console.ReadLine(), out amount))
+                Console.WriteLine("Enter an amount to withdraw: ");
+                if (!decimal.TryParse(Console.ReadLine(), out amount))
                 {
                     continue;
                 }
+                amount *= -1;
                 break;
             }
-
-            AccountDepositResponse response = accountManager.Deposit(accountNumber, amount);
+            AccountWithdrawResponse response = accountManager.Withdraw(accountNumber, amount);
 
             if(response.Success)
             {
-                Console.WriteLine("Deposit completed!");
+                Console.WriteLine("Withdrawal was successful!");
                 Console.WriteLine($"Account Number: {response.Account.AccountNumber}");
-                Console.WriteLine($"Old balance: {response.OldBalance:c}");
-                Console.WriteLine($"Amount Depositied: {response.AmountDeposited:c}");
+                Console.WriteLine($"Old Balance: {response.OldBalance:c}");
+                Console.WriteLine($"Withdrawal Amount: {response.Amount:c}");
                 Console.WriteLine($"New Balance: {response.Account.Balance:c}");
-
             }
             else
             {
                 Console.WriteLine("An error occured: ");
                 Console.WriteLine(response.Message);
             }
-
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("Press any key to conintue...");
             Console.ReadKey();
         }
-
     }
 }

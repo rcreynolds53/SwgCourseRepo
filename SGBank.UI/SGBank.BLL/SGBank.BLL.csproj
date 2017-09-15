@@ -36,6 +36,11 @@
     <Compile Include="AccountManagerFactory.cs" />
     <Compile Include="DepositRules\FreeAccountDepositRule.cs" />
     <Compile Include="DepositRules\DepositRulesFactory.cs" />
+    <Compile Include="WithdrawRules\WithdrawRulesFactory.cs" />
+    <Compile Include="WithdrawRules\FreeAccountWithdrawRule.cs" />
+    <Compile Include="DepositRules\NoLimitDepositRule.cs" />
+    <Compile Include="WithdrawRules\BasicAccountWithdrawRule.cs" />
+    <Compile Include="WithdrawRules\PremiumAccountWithdrawRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SGBank.Models\SGBank.Models.csproj">
@@ -49,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DepositRules\" />
+    <Folder Include="WithdrawRules\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

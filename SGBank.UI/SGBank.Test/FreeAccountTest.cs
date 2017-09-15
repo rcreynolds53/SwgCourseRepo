@@ -1,7 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
 using SGBank.BLL;
+using SGBank.BLL.DepositRules;
 using SGBank.Models;
+using SGBank.Models.Interfaces;
 using SGBank.Models.Responses;
 
 namespace SGBank.Test
@@ -10,15 +12,38 @@ namespace SGBank.Test
     public class FreeAccountTest
     {
         [Test]
-       public void CanLoadFreeAccountTestData()
+        public void CanLoadFreeAccountTestData()
         {
             AccountManager manager = AccountManagerFactory.Create();
 
-            AccountLookupResponse response = manager.LookupAccount("");
+            AccountLookupResponse response = manager.LookupAccount("12345");
 
             Assert.IsNotNull(response.Account);
             Assert.IsTrue(response.Success);
             Assert.AreEqual("12345", response.Account.AccountNumber);
+        }
+        //fail too much deposited
+        [TestCase("12345", "Free Account", 100, AccountType.Free, 250, false)]
+        //fail, negative number 
+		[TestCase("12345", "Free Account", 100, AccountType.Free, -100, false)]
+        // fail, not a free account
+        [TestCase("12345", "Free Account", 100, AccountType.Basic, 50, false)]
+        //sucess
+		[TestCase("12345", "Free Account", 100, AccountType.Free, 50, true)]
+		public void FreeAccountDepositRuleTest(string accountNumber, string name, decimal balance, 
+                                               AccountType accountType, decimal amount, bool expectedResult)
+        {
+            IDeposit depositRule = new FreeAccountDepositRule();
+            Account account = new Account();
+            account.AccountNumber = accountNumber;
+            account.Balance = balance;
+            account.Type = accountType;
+            account.Name = name;
+
+            AccountDepositResponse response = depositRule.Deposit(account, amount);
+
+            Assert.AreEqual(expectedResult, response.Success);
+
         }
     }
 }

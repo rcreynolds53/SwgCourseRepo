@@ -19,7 +19,7 @@ namespace SGBank.UI
                 Console.WriteLine("\nQ to quit.");
                 Console.WriteLine("\nEnter Selection: ");
 
-                string userInput = Console.ReadLine();
+                string userInput = Console.ReadLine().ToUpper();
 
                 switch (userInput)
                 {
@@ -32,6 +32,8 @@ namespace SGBank.UI
                         depositWorkflow.Execute();
                         break;
                     case "3":
+                        WithdrawWorkflow withdrawWorkflow = new WithdrawWorkflow();
+                        withdrawWorkflow.Execute();
                         break;
                     case "Q":
                         return;

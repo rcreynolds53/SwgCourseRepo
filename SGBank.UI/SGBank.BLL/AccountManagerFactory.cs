@@ -14,8 +14,14 @@ namespace SGBank.BLL
             {
                 case "FreeTest":
                     return new AccountManager(new FreeAccountTestRepository());
+                case "BasicTest":
+                    return new AccountManager(new BasicAccountTestRepository());
+				case "PremiumTest":
+					return new AccountManager(new PremiumAccountTestRepository());
+				case "FileRepo":
+					return new AccountManager(new FileAccountRepository());
                 default:
-                    throw new Exception("Mode value in app confiog is not valid");
+                    throw new Exception("Mode value in app config is not valid");
             }
         }
     }

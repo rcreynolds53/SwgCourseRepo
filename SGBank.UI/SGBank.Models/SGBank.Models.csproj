@@ -38,6 +38,8 @@
     <Compile Include="Responses\AccountLookupResponse.cs" />
     <Compile Include="Interfaces\IDeposit.cs" />
     <Compile Include="Responses\AccountDepositResponse.cs" />
+    <Compile Include="Interfaces\IWithdraw.cs" />
+    <Compile Include="Responses\AccountWithdrawResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

@@ -4,14 +4,14 @@ using SGBank.Models.Interfaces;
 
 namespace SGBank.Data
 {
-    public class FreeAccountTestRepository : IAccountRepository
+    public class BasicAccountTestRepository : IAccountRepository
     {
         private static Account _account = new Account
         {
-            Name = "Free Account",
-            AccountNumber = "12345",
-            Balance = 100.00M,
-            Type = AccountType.Free
+            Name = "Basic Account",
+            AccountNumber = "33333",
+            Balance = 100M,
+            Type = AccountType.Basic
         };
         public Account LoadAccount(string accountNumber)
         {
@@ -21,7 +21,6 @@ namespace SGBank.Data
             }
             return _account;
         }
-
         public void SaveAccount(Account account)
         {
             _account = account;

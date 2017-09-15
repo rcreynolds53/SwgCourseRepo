@@ -39,6 +39,7 @@
     <Compile Include="Workflows\AccountLookupWorkflow.cs" />
     <Compile Include="ConsoleIO.cs" />
     <Compile Include="Workflows\DepositWorkflow.cs" />
+    <Compile Include="Workflows\WithdrawWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SGBank.Models\SGBank.Models.csproj">
