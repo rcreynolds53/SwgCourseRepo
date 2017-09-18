@@ -4,7 +4,7 @@ using FlooringMastery.Models.Responses;
 
 namespace FlooringMastery.Models
 {
-    public interface IOrder
+    public interface IOrderRepo
     {
         List<Order> LoadOrdersList();
         void SaveOrder(Order ordertoSave);

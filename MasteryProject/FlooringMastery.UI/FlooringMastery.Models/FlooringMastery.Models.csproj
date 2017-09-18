@@ -34,7 +34,9 @@
     <Compile Include="Responses\Order.cs" />
     <Compile Include="Responses\Product.cs" />
     <Compile Include="Responses\Tax.cs" />
-    <Compile Include="Interfaces\IOrder.cs" />
+    <Compile Include="Interfaces\IOrderRepo.cs" />
+    <Compile Include="Interfaces\ITaxRepo.cs" />
+    <Compile Include="Interfaces\IProductRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Responses\" />

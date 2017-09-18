@@ -6,7 +6,7 @@ using System.IO;
 
 namespace FlooringMastery.Data
 {
-    public class TestOrderRepository : IOrder
+    public class TestOrderRepository : IOrderRepo
     {
         private string _filePath; //= "/Users/macbookpro/Documents/SG-Bootcamp/dotnet-rob-reynolds/MasteryProject/FlooringMastery.UI/FlooringMastery.UI/bin/Debug/Orders_06012013.txt";
         private Order _order = new Order();
