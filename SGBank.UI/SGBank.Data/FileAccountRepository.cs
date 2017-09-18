@@ -11,13 +11,13 @@ namespace SGBank.Data
     {
         public List<Account> _account = new List<Account>();
 
-        private const string _filepath = "/Users/macbookpro/Documents/SG-Bootcamp/dotnet-rob-reynolds/SGBank.UI/SGBank.UI/bin/Debug/Accounts.txt";
+        private string _filepath; //= "/Users/macbookpro/Documents/SG-Bootcamp/dotnet-rob-reynolds/SGBank.UI/SGBank.UI/bin/Debug/Accounts.txt";
         //private static Account _account = new Account();
         //private Account _account = new Account();
-        public FileAccountRepository()
+        public FileAccountRepository(string filePath)
         {
-            //filepath = _filepath;
-            List(_filepath);
+            _filepath = filePath;
+            List();
         }
 
         public Account LoadAccount(string accountNumber)
@@ -57,10 +57,9 @@ namespace SGBank.Data
 			}
 		}
 
-        public void List(string filepath)
+        public void List()
         {
-            filepath = _filepath;
-            using (StreamReader reader = new StreamReader(filepath))
+            using (StreamReader reader = new StreamReader(_filepath))
             {
                 reader.ReadLine();
                 string line;
@@ -83,6 +82,7 @@ namespace SGBank.Data
                             newAccount.Type = AccountType.Premium;
                             break;
                     }
+
                     _account.Add(newAccount);
                 }
             }

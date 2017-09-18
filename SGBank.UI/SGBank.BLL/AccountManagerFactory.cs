@@ -6,7 +6,7 @@ namespace SGBank.BLL
 {
     public static class AccountManagerFactory
     {
-		//public const string _filepath = "/Users/macbookpro/Documents/SG-Bootcamp/dotnet-rob-reynolds/SGBank.UI/SGBank.UI/bin/Debug/Accounts.txt";
+		private const string _filepath = "/Users/macbookpro/Documents/SG-Bootcamp/dotnet-rob-reynolds/SGBank.UI/SGBank.UI/bin/Debug/Accounts.txt";
 		public static AccountManager Create()
         {
             string mode = ConfigurationManager.AppSettings["Mode"].ToString();
@@ -20,7 +20,7 @@ namespace SGBank.BLL
 				case "PremiumTest":
 					return new AccountManager(new PremiumAccountTestRepository());
 				case "FileRepo":
-					return new AccountManager(new FileAccountRepository());
+                    return new AccountManager(new FileAccountRepository(_filepath));
                 default:
                     throw new Exception("Mode value in app config is not valid");
             }
