@@ -41,7 +41,7 @@ namespace SGBank.Test
 
 		public void BasicAccountWithdrawRulesTest(string accountNumber, string name,
 										 decimal balance, AccountType accountType,
-										decimal amount,decimal newBalance,
+										decimal amount,decimal expectedBalance,
                                         bool expectedResult)
         {
             IWithdraw withdrawRule = new BasicAccountWithdrawRule();
@@ -50,10 +50,11 @@ namespace SGBank.Test
             account.Name = name;
             account.Balance = balance;
             account.Type = accountType;
-
             AccountWithdrawResponse response = withdrawRule.Withdraw(account,amount);
             if (response.Success)
-                newBalance = response.Account.Balance;
+            {
+                Assert.AreEqual(expectedBalance, response.Account.Balance);
+            }
             Assert.AreEqual(expectedResult, response.Success);
 
 
