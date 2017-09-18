@@ -37,6 +37,7 @@
     <Compile Include="FreeAccountTest.cs" />
     <Compile Include="BasicAccountTests.cs" />
     <Compile Include="PremiumAccountTests.cs" />
+    <Compile Include="FilePathTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SGBank.BLL\SGBank.BLL.csproj">

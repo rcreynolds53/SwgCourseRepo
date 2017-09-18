@@ -6,7 +6,8 @@ namespace SGBank.BLL
 {
     public static class AccountManagerFactory
     {
-        public static AccountManager Create()
+		//public const string _filepath = "/Users/macbookpro/Documents/SG-Bootcamp/dotnet-rob-reynolds/SGBank.UI/SGBank.UI/bin/Debug/Accounts.txt";
+		public static AccountManager Create()
         {
             string mode = ConfigurationManager.AppSettings["Mode"].ToString();
 
