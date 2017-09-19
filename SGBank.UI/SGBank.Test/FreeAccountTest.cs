@@ -56,7 +56,7 @@ namespace SGBank.Test
         [TestCase("12345", "Free Account", 50, AccountType.Free, -60, -10 ,false)]
 
         public void FreeAccountWithdrawRuleTest(string accountNumber, string name, decimal balance,
-                                                AccountType accountType, decimal amount, decimal newBalance, bool expectedResult)
+                                                AccountType accountType, decimal amount, decimal expectedBalance, bool expectedResult)
         {
 
             IWithdraw withdrawRule = new FreeAccountWithdrawRule();
@@ -67,7 +67,10 @@ namespace SGBank.Test
             account.Type = accountType;
 
             AccountWithdrawResponse response = withdrawRule.Withdraw(account, amount);
-
+            if(response.Success)
+            {
+                Assert.AreEqual(expectedBalance, response.Account.Balance);
+            }
             Assert.AreEqual(expectedResult, response.Success);
         }
 
