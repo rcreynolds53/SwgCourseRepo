@@ -48,7 +48,7 @@ namespace SGBank.Test
         }
         [TestCase("12345", "Free Account", 100, AccountType.Basic, -50, 50 ,false)]
         //fail, negative number 
-        [TestCase("12345", "Basic Account", 100, AccountType.Free, -101, -1 ,false)]
+        [TestCase("12345", "Basic Account", 101, AccountType.Free, -100, 1 ,true)]
         // fail, not a free account
         [TestCase("12345", "Free Account", 100, AccountType.Free, -50, 50 ,true)]
         //sucess
@@ -67,8 +67,7 @@ namespace SGBank.Test
             account.Type = accountType;
 
             AccountWithdrawResponse response = withdrawRule.Withdraw(account, amount);
-            //if (response.Success)
-                //newBalance = response.Account.Balance;
+
             Assert.AreEqual(expectedResult, response.Success);
         }
 
