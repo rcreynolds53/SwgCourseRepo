@@ -24,7 +24,7 @@ namespace FlooringMastery.Tests
         public void CanReadOrdersFromFile()
         {
             TestOrderRepository repo = new TestOrderRepository(_filePath);
-            List<Order> orders = repo.LoadOrdersList();
+            //List<Order> orders = repo.LoadOrdersList();
 
             Assert.AreEqual(1, orders.Count);
 

@@ -36,6 +36,7 @@
     <Compile Include="Rules\AddOrderRule.cs" />
     <Compile Include="Rules\EditOrderRule.cs" />
     <Compile Include="Rules\RemoveOrderRule.cs" />
+    <Compile Include="OrderManagerMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlooringMastery.Data\FlooringMastery.Data.csproj">

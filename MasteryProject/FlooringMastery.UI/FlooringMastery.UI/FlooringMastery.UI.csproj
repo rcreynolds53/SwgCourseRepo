@@ -39,6 +39,7 @@
     <Compile Include="Workflows\EditOrderWorkflow.cs" />
     <Compile Include="Workflows\RemoveOrderWorkflow.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="ConsoleIO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Workflows\" />

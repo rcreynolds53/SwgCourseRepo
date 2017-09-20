@@ -31,14 +31,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestOrderRepository.cs" />
-    <Compile Include="ProdOrderRepository.cs" />
+    <Compile Include="TestOrderRepositorymock.cs" />
+    <Compile Include="ProdRepos\ProdOrderRepository.cs" />
+    <Compile Include="TestRepos\TestOrderRepository.cs" />
+    <Compile Include="ProdRepos\ProdTaxRepository.cs" />
+    <Compile Include="ProdRepos\ProdProductRepository.cs" />
+    <Compile Include="TestRepos\TestTaxRepository.cs" />
+    <Compile Include="TestRepos\TestProductRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlooringMastery.Models\FlooringMastery.Models.csproj">
       <Project>{B62B1C6F-561A-4147-B827-CAF423367AED}</Project>
       <Name>FlooringMastery.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ProdRepos\" />
+    <Folder Include="TestRepos\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

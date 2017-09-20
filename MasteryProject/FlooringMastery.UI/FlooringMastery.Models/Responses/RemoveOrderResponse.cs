@@ -1,9 +1,9 @@
 ﻿using System;
 namespace FlooringMastery.Models.Responses
 {
-    public class Tax
+    public class RemoveOrderResponse
     {
-        public Tax()
+        public RemoveOrderResponse()
         {
         }
     }

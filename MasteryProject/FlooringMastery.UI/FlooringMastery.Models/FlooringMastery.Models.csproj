@@ -31,12 +31,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responses\Order.cs" />
-    <Compile Include="Responses\Product.cs" />
-    <Compile Include="Responses\Tax.cs" />
     <Compile Include="Interfaces\IOrderRepo.cs" />
     <Compile Include="Interfaces\ITaxRepo.cs" />
     <Compile Include="Interfaces\IProductRepo.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Tax.cs" />
+    <Compile Include="Responses\DisplayOrderResponse.cs" />
+    <Compile Include="Responses\AddOrderResponse.cs" />
+    <Compile Include="Responses\Response.cs" />
+    <Compile Include="Responses\RemoveOrderResponse.cs" />
+    <Compile Include="Responses\EditOrderResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Responses\" />

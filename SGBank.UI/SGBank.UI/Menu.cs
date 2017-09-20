@@ -15,7 +15,6 @@ namespace SGBank.UI
                 Console.WriteLine("1. Lookup an Account");
                 Console.WriteLine("2. Deposit");
                 Console.WriteLine("3. Withdraw");
-
                 Console.WriteLine("\nQ to quit.");
                 Console.WriteLine("\nEnter Selection: ");
 

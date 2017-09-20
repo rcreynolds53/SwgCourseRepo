@@ -6,7 +6,8 @@ namespace FlooringMastery.UI
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Menu game = new Menu();
+            game.Start();
         }
     }
 }

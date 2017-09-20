@@ -23,7 +23,6 @@ namespace SGBank.Data
         public Account LoadAccount(string accountNumber)
         {
             var accountToLoad = _account.SingleOrDefault(acc => acc.AccountNumber == accountNumber);
-
             return accountToLoad;
 
         }
