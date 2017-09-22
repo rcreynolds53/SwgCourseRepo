@@ -26,6 +26,11 @@ namespace FlooringMastery.Data
             throw new NotImplementedException();
         }
 
+        public Order GetOrder(DateTime date, int orderNumber)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Order> LoadOrdersList()
         {
             List<Order> orders = new List<Order>();
@@ -62,19 +67,11 @@ namespace FlooringMastery.Data
             throw new NotImplementedException();
         }
 
-        public void SaveOrder(Order ordertoSave)
-        {
-            _order = ordertoSave;
-        }
 
         public void SaveThisOrder(Order order)
         {
             throw new NotImplementedException();
         }
 
-        void IOrderRepo.LoadOrdersList()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

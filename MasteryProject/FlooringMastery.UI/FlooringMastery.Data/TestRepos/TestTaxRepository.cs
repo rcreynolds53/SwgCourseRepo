@@ -7,16 +7,31 @@ namespace FlooringMastery.Data.TestRepos
 {
     public class TestTaxRepository : ITaxRepo
     {
-        private static Tax _tax = new Tax()
+        private static List<Tax> _tax = new List<Tax>
         {
-            StateAbbreviation = "MI",
-            StateName = "Michigan",
-            TaxRate = 6.00M,
+            new Tax
+            {
+                StateAbbreviation = "MI",
+                StateName = "Michigan",
+                TaxRate = 5.75M,
+            },
+            new Tax
+            {
+                StateAbbreviation = "OH",
+                StateName = "Ohio",
+                TaxRate = 6.25M,
+            },
+             new Tax
+            {
+                StateAbbreviation = "MI",
+                StateName = "Indiana",
+                TaxRate = 6.00M,
+            },
         };
 
         public List<Tax> ListStateTax()
         {
-            return new List<Tax>() { _tax };
+            return _tax; 
         }
     }
 }

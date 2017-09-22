@@ -6,5 +6,10 @@ namespace FlooringMastery.UI.Workflows
         public RemoveOrderWorkflow()
         {
         }
+
+        internal void Execute()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

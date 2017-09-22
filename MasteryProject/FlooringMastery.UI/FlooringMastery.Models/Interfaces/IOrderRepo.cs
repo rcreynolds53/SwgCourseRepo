@@ -6,11 +6,14 @@ namespace FlooringMastery.Models
 {
     public interface IOrderRepo
     {
-        List<Order> LoadOrdersList(string filePath);
-		void EditOrder(Order orderToEdit, int index);
-		void AddOrder(Order ordertoAdd);
-        void RemoveOrder(Order ordertoRemove);
-        void SaveThisOrder(Order order);
+        List<Order> LoadOrdersList();
+		void EditOrder(Order order);
+		void CommitThisOrder(Order order);
+        //void RemoveOrder(int orderNumber);
+        //void SaveOrders(List<Order> orders);
+        Order GetOrder(DateTime date, int orderNumber);
+        List<Order> GetAllOrdersForDate(DateTime userDate);
+        void UpdateThisOrder(Order order);
         //string CreateCsvForOrder(Order order);
         //void CreateOrderFile(List<Order> orders);
     }

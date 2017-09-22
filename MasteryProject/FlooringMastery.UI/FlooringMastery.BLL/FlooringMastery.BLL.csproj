@@ -28,6 +28,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -36,7 +37,6 @@
     <Compile Include="Rules\AddOrderRule.cs" />
     <Compile Include="Rules\EditOrderRule.cs" />
     <Compile Include="Rules\RemoveOrderRule.cs" />
-    <Compile Include="OrderManagerMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlooringMastery.Data\FlooringMastery.Data.csproj">

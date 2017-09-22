@@ -37,11 +37,13 @@
     <Compile Include="Order.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Tax.cs" />
-    <Compile Include="Responses\DisplayOrderResponse.cs" />
+    <Compile Include="Responses\DisplayOrdersResponse.cs" />
     <Compile Include="Responses\AddOrderResponse.cs" />
     <Compile Include="Responses\Response.cs" />
     <Compile Include="Responses\RemoveOrderResponse.cs" />
     <Compile Include="Responses\EditOrderResponse.cs" />
+    <Compile Include="Responses\DisplayProductsResponse.cs" />
+    <Compile Include="Responses\DisplaySingleOrderResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Responses\" />

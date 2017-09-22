@@ -45,14 +45,17 @@
     <Folder Include="Workflows\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlooringMastery.Models\FlooringMastery.Models.csproj">
-      <Project>{B62B1C6F-561A-4147-B827-CAF423367AED}</Project>
-      <Name>FlooringMastery.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FlooringMastery.BLL\FlooringMastery.BLL.csproj">
       <Project>{4B8FF6C8-2F87-4488-9F90-50E80856AAB1}</Project>
       <Name>FlooringMastery.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FlooringMastery.Models\FlooringMastery.Models.csproj">
+      <Project>{B62B1C6F-561A-4147-B827-CAF423367AED}</Project>
+      <Name>FlooringMastery.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
