@@ -138,7 +138,7 @@ namespace FlooringMastery.BLL
                 return response;
             }
 
-            if (_taxRepo.ListStateTax().All(s => s.StateName != (state.First().ToString().ToUpper() + state.Substring(1))))
+            if (_taxRepo.ListStateTax().All(s => s.StateName != state))
             {
                 response.Success = false;
                 response.Message = "Error: the state you entered does not exist.";
@@ -147,7 +147,7 @@ namespace FlooringMastery.BLL
 
             var stateTaxData = _taxRepo.ListStateTax().First(s => s.StateName == state);
 
-            if (_productRepo.ListProducts().All(p => p.ProductType != (productType.First().ToString().ToUpper() + productType.Substring(1))))
+            if (_productRepo.ListProducts().All(p => p.ProductType != productType))
             {
                 response.Success = false;
                 response.Message = "Error: we do not sell the product you entered.";
@@ -174,7 +174,7 @@ namespace FlooringMastery.BLL
         {
             EditOrderResponse response = new EditOrderResponse();
             response.Order = new Order();
-            if (_taxRepo.ListStateTax().All(s => s.StateName != state.First().ToString().ToUpper() + state.Substring(1)))
+            if (_taxRepo.ListStateTax().All(s => s.StateName != state))
             {
                 response.Success = false;
                 response.Message = $"Error: we currently do not sell in {response.Order.State}";
@@ -182,7 +182,7 @@ namespace FlooringMastery.BLL
             }
             var stateTaxData = _taxRepo.ListStateTax().First(s => s.StateName == state);
 
-            if (_productRepo.ListProducts().All(p => p.ProductType != productType.First().ToString().ToUpper() + productType.Substring(1)))
+            if (_productRepo.ListProducts().All(p => p.ProductType != productType))
             {
                 response.Success = false;
                 response.Message = $"Error: SG Flooring does not sell {response.Order.ProductType}";

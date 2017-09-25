@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FlooringMastery.Models.Responses;
 using System.Linq;
+using System.Globalization;
 
 namespace FlooringMastery.UI
 {
@@ -60,7 +61,7 @@ namespace FlooringMastery.UI
             {
                 Console.WriteLine($"{newProduct} has replace {productType}");
                 Console.ReadKey();
-                return (newProduct.First().ToString().ToUpper() + newProduct.Substring(1));
+                return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(newProduct.ToLower());
             }
         }
 
@@ -79,7 +80,7 @@ namespace FlooringMastery.UI
                 Console.WriteLine($"{newState} has replaced {state}");
                 Console.ReadKey();
             }
-            return newState.First().ToString().ToUpper() + newState.Substring(1);
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(newState.ToLower());
 
 		}
 
@@ -199,7 +200,7 @@ namespace FlooringMastery.UI
             while (true)
             {   
                 Console.WriteLine();
-                Console.WriteLine("Please enter the product you want to purchase.");
+                Console.WriteLine("Please enter the product you want to purchase with the first letter capitalized.");
                 var productType = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(productType))
                 {
@@ -210,7 +211,7 @@ namespace FlooringMastery.UI
                 }
                 else
                 {
-                    return (productType.First().ToString().ToUpper() + productType.Substring(1));
+                    return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(productType.ToLower());
                 }
             }
         }
@@ -220,7 +221,7 @@ namespace FlooringMastery.UI
             while (true)
             {
                 Console.WriteLine("Please enter your state.");
-                var state = Console.ReadLine().Substring(0,1).ToUpper();
+                var state = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(state))
                 {
@@ -231,7 +232,7 @@ namespace FlooringMastery.UI
                 }
                 else
                 {
-                    return state.First().ToString().ToUpper() + state.Substring(1);
+                    return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(state.ToLower());
                 }
             }
         }

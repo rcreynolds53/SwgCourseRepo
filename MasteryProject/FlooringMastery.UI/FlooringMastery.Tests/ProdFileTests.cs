@@ -19,7 +19,7 @@ namespace FlooringMastery.Tests
         [SetUp]
         public void Setup()
         {
-            if(File.Exists(_filepath))
+            if (File.Exists(_filepath))
             {
                 File.Delete(_filepath);
             }
@@ -44,29 +44,58 @@ namespace FlooringMastery.Tests
         [Test]
         public void CanAddOrderToFile()
         {
-			Order order = new Order();
-			ProdOrderRepository prodOrderRepo = new ProdOrderRepository();
+            Order order = new Order();
+            ProdOrderRepository prodOrderRepo = new ProdOrderRepository();
             ProdProductRepository prodProductRepo = new ProdProductRepository();
             ProdTaxRepository prodTaxRepo = new ProdTaxRepository();
-			order.Date = DateTime.Parse("09/26/2018");
+            order.Date = DateTime.Parse("09/26/2018");
             order.CustomerName = "Bill";
             order.State = "Michigan";
             order.ProductType = "Wood";
             order.Area = 100M;
-           prodOrderRepo.CommitThisOrder(order);
+            prodOrderRepo.CommitThisOrder(order);
 
             var orders = prodOrderRepo.GetAllOrdersForDate(order.Date);
 
             Assert.AreEqual(5, orders.Count);
 
         }
-   //     [Test]
-   //     public void CanEditOrderFromFile()
-   //     {
-			//Order order = new Order();
-			//ProdOrderRepository prodOrderRepo = new ProdOrderRepository();
-			//order.Date = DateTime.Parse("09/26/2018");
-        //}
+        [Test]
+        public void CanEditOrderFromFile()
+        {
+            Order order = new Order();
+            ProdOrderRepository prodOrderRepo = new ProdOrderRepository();
+            order.Date = DateTime.Parse("09/26/2018");
+            order.OrderNumber = 1;
+            var orderToEdit = prodOrderRepo.GetOrder(order.Date, order.OrderNumber);
+            order.CustomerName = "Tommy";
+            order.ProductType = "Laminate";
+            order.Area = 600;
+            order.State = "Pennsylvania";
+            prodOrderRepo.UpdateThisOrder(order);
+            var orders = prodOrderRepo.GetAllOrdersForDate(order.Date);
+            Assert.AreEqual(4, orders.Count);
+            var editedOrder = orders[0];
+            Assert.AreEqual("Tommy", editedOrder.CustomerName);
+            Assert.AreEqual("Pennsylvania", editedOrder.State);
+            Assert.AreEqual(600, editedOrder.Area);
+            Assert.AreEqual("Laminate", editedOrder.ProductType);
+        }
+
+        [Test]
+        public void CanRemoveOrderFromFile()
+        {
+            Order order = new Order();
+            ProdOrderRepository prodOrderRepo = new ProdOrderRepository();
+            order.Date = DateTime.Parse("09/26/2018");
+            order.OrderNumber = 1;
+            var orderToRemove = prodOrderRepo.GetOrder(order.Date, order.OrderNumber);
+            prodOrderRepo.RemoveThisOrder(order);
+
+            var orders = prodOrderRepo.GetAllOrdersForDate(order.Date);
+
+            Assert.AreEqual(3, orders.Count);
+        }
     }
 }
 
