@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FlooringMastery.Models.Responses;
+using System.Linq;
 
 namespace FlooringMastery.UI
 {
@@ -23,6 +24,29 @@ namespace FlooringMastery.UI
             Console.WriteLine($"Total: {order.Total:c}");
         }
 
+        internal static void CancellationAborted()
+        {
+            Console.WriteLine("You decided to keep your existing order. Returning to main menu.");
+        }
+
+        internal static bool ConfirmOrderCancellation()
+        {
+            bool isCancelled = false;
+			Console.WriteLine("Please review your order summary before cancelling your order.Are you sure you want to cancel your order?\nEnter Y to cancel your order or enter N to keep your order.");
+			var userInput = Console.ReadLine();
+
+			switch (userInput.ToUpper())
+			{
+				case "Y":
+					isCancelled = true;
+					break;
+				case "N":
+					isCancelled = false;
+					break;
+			}
+			return isCancelled;
+        }
+
         internal static string EditProductType(string productType)
         {
             Console.WriteLine("To edit the product please type in a new product:\n\nTo keep the product the same press enter.");
@@ -36,7 +60,7 @@ namespace FlooringMastery.UI
             {
                 Console.WriteLine($"{newProduct} has replace {productType}");
                 Console.ReadKey();
-                return newProduct;
+                return (newProduct.First().ToString().ToUpper() + newProduct.Substring(1));
             }
         }
 
@@ -55,7 +79,7 @@ namespace FlooringMastery.UI
                 Console.WriteLine($"{newState} has replaced {state}");
                 Console.ReadKey();
             }
-			return newState;
+            return newState.First().ToString().ToUpper() + newState.Substring(1);
 
 		}
 
@@ -186,7 +210,7 @@ namespace FlooringMastery.UI
                 }
                 else
                 {
-                    return productType;
+                    return (productType.First().ToString().ToUpper() + productType.Substring(1));
                 }
             }
         }
@@ -196,7 +220,7 @@ namespace FlooringMastery.UI
             while (true)
             {
                 Console.WriteLine("Please enter your state.");
-                var state = Console.ReadLine();
+                var state = Console.ReadLine().Substring(0,1).ToUpper();
 
                 if (string.IsNullOrWhiteSpace(state))
                 {
@@ -207,7 +231,7 @@ namespace FlooringMastery.UI
                 }
                 else
                 {
-                   return state;
+                    return state.First().ToString().ToUpper() + state.Substring(1);
                 }
             }
         }

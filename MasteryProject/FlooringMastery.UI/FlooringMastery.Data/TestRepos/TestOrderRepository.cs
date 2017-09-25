@@ -55,11 +55,6 @@ namespace FlooringMastery.Data
             _orders.Add(order);
         }
 
-        public void EditOrder(Order order)
-        {
-            throw new NotSupportedException();
-		}
-
         public List<Order> GetAllOrdersForDate(DateTime userDate)
         {
             return _orders.Where(d=>d.Date == userDate).OrderBy(o=>o.OrderNumber).ToList();
@@ -70,24 +65,15 @@ namespace FlooringMastery.Data
             return GetAllOrdersForDate(date).FirstOrDefault(o => o.OrderNumber == orderNumber);       
         }
 
-        public List<Order> LoadOrdersList()
+        public void UpdateOrdersList(List<Order> orders, DateTime date)
         {
-            return _orders;
+            _orders = orders;  
         }
 
-        public void RemoveOrder(int orderNumber)
+        public void RemoveThisOrder(Order order)
         {
-            throw new NotImplementedException();
-        }
-
-        //public void SaveThisOrder(Order order)
-        //{
-        //    _order = order;
-        //}
-
-        public void SaveOrders(List<Order> orders)
-        {
-            _orders = orders;
+			Order orderToRemove = GetOrder(order.Date, order.OrderNumber);
+            _orders.Remove(orderToRemove);
 		}
 
         public void UpdateThisOrder(Order order)

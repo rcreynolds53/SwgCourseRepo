@@ -16,6 +16,7 @@ namespace FlooringMastery.UI.Workflows
 			Console.WriteLine("Add an Order");
 			Console.WriteLine("------------------------------------");
 			DateTime userDate = ConsoleIO.GetDateFromUser();
+            manager.CreateOrderDate(userDate);
             string customerName = ConsoleIO.GetNameFromUser();
             string state = ConsoleIO.GetStateFromUser();
             List<Product> products = manager.GetAllProducts();
@@ -28,6 +29,8 @@ namespace FlooringMastery.UI.Workflows
             if (!response.Success)
             {
                 Console.WriteLine(response.Message);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
             else
             {

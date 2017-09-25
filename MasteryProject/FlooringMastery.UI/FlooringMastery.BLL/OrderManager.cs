@@ -24,6 +24,20 @@ namespace FlooringMastery.BLL
 
         }
 
+        public void CreateOrderDate(DateTime userDate)
+        {
+            if (!File.Exists(string.Format("/Data/System.IO/Orders_{0:MMddyyyy}.txt", userDate)))
+            {
+                using(var fileToCreate = File.Create(string.Format("/Data/System.IO/Orders_{0:MMddyyyy}.txt", userDate)))
+                {
+                    using (var writer = new StreamWriter(fileToCreate))
+                    {
+						writer.WriteLine("OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total");
+					}
+				}
+            }
+		}
+
         public DisplaySingleOrderResponse GetOrderToEdit(DateTime date, int orderNumber)
         {
             DisplaySingleOrderResponse response = new DisplaySingleOrderResponse();
@@ -45,6 +59,11 @@ namespace FlooringMastery.BLL
             }
         }
 
+        public void RemoveThisOrder(Order order)
+        {
+            _orderRepo.RemoveThisOrder(order);
+        }
+
         public List<Product> GetAllProducts()
         {
             return _productRepo.ListProducts();
@@ -56,20 +75,7 @@ namespace FlooringMastery.BLL
 
         }
 
-        //public void SaveOrders(List<Order> orders)
-        //{
-        //	if (File.Exists(_filePath))
-        //		File.Delete(_filePath);
-        //	using (StreamWriter sw = new StreamWriter(_filePath))
-        //	{
-        //		sw.WriteLine("OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total");
-        //		foreach (var order in orders)
-        //		{
-        //			sw.WriteLine(string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11}", order.OrderNumber, order.CustomerName, order.State, order.TaxRate, order.ProductType, order.Area, order.CostPerSquareFoot, order.LaborCostPerSquareFoot, order.MaterialCost, order.LaborCost, order.Tax, order.Total));
-        //		}
-        //	}
-        //}
-
+  
         public DisplayOrdersResponse GetAllOrdersForDate(DateTime userDate)
         {
             DisplayOrdersResponse response = new DisplayOrdersResponse();
@@ -95,36 +101,12 @@ namespace FlooringMastery.BLL
             _orderRepo.UpdateThisOrder(order);
         }
 
-        //      public DisplayOrdersResponse DisplayOrder(DateTime date, int orderNumber)
-        //      {
-        //	throw new NotImplementedException();
-        //	DisplayOrdersResponse response = new DisplayOrdersResponse();
-        //	if (_orderRepo.GetOrder(date, orderNumber).Equals(null))
-        //	{
-        //	    response.Success = false;
-        //	    response.Message = "Error: the date you entered is invalid.";
-        //	    return response;
-        //	}
-        //	_orderRepo.GetOrder(order.Date, order.OrderNumber);
-        //	response.Success = true;
-        //	return response;
-        //}
         public AddOrderResponse BuildNewOrder(DateTime date, string customerName, string state, string productType, decimal area)
         {
             AddOrderResponse response = new AddOrderResponse();
             response.Order = new Order();
-            //List<Tax> stateTax = new List<Tax>();
-            //List<Product> productsRepo = new List<Product>();
-
-            //if(_orderRepo.LoadOrdersList(string.Format("/Data/System.IO/Orders_{0:MMddyyyy}.txt", date)).Equals(null))
-            //{
-            //    reponse.Order.OrderNumber = 1;
-            //}
-            //else
-            //{
-            //    var biggestNumber = _orderRepo.LoadOrdersList(string.Format("/Data/System.IO/Orders_{0:MMddyyyy}.txt", date)).OrderByDescending(o => o.OrderNumber).First();
-            //    reponse.Order.OrderNumber = biggestNumber.OrderNumber++;
-            //}
+            //if (!File.Exists(string.Format("/Data/System.IO/Orders_{0:MMddyyyy}.txt", date)))
+                //File.Create(string.Format("/Data/System.IO/Orders_{0:MMddyyyy}.txt", date));
             if (_orderRepo.GetAllOrdersForDate(date).Count == 0)
             {
                 response.Order.OrderNumber = 1;
@@ -156,7 +138,7 @@ namespace FlooringMastery.BLL
                 return response;
             }
 
-            if (_taxRepo.ListStateTax().All(s => s.StateName != state))
+            if (_taxRepo.ListStateTax().All(s => s.StateName != (state.First().ToString().ToUpper() + state.Substring(1))))
             {
                 response.Success = false;
                 response.Message = "Error: the state you entered does not exist.";
@@ -165,7 +147,7 @@ namespace FlooringMastery.BLL
 
             var stateTaxData = _taxRepo.ListStateTax().First(s => s.StateName == state);
 
-            if (_productRepo.ListProducts().All(p => p.ProductType != productType))
+            if (_productRepo.ListProducts().All(p => p.ProductType != (productType.First().ToString().ToUpper() + productType.Substring(1))))
             {
                 response.Success = false;
                 response.Message = "Error: we do not sell the product you entered.";
@@ -192,7 +174,7 @@ namespace FlooringMastery.BLL
         {
             EditOrderResponse response = new EditOrderResponse();
             response.Order = new Order();
-            if (_taxRepo.ListStateTax().All(s => s.StateName != state))
+            if (_taxRepo.ListStateTax().All(s => s.StateName != state.First().ToString().ToUpper() + state.Substring(1)))
             {
                 response.Success = false;
                 response.Message = $"Error: we currently do not sell in {response.Order.State}";
@@ -200,10 +182,16 @@ namespace FlooringMastery.BLL
             }
             var stateTaxData = _taxRepo.ListStateTax().First(s => s.StateName == state);
 
-            if (_productRepo.ListProducts().All(p => p.ProductType != productType))
+            if (_productRepo.ListProducts().All(p => p.ProductType != productType.First().ToString().ToUpper() + productType.Substring(1)))
             {
                 response.Success = false;
                 response.Message = $"Error: SG Flooring does not sell {response.Order.ProductType}";
+                return response;
+            }
+            if(area < 100)
+            {
+                response.Success = false;
+                response.Message = "Error: minimum oder area is 100.";
                 return response;
             }
             var productInfo = _productRepo.ListProducts().First(p => p.ProductType == productType);
@@ -219,138 +207,6 @@ namespace FlooringMastery.BLL
             response.Success = true;
             return response;
         }
-        //}
-        //public EditOrderResponse EditOrder(Order order)
-        //{
-        //    EditOrderResponse response = new EditOrderResponse();
-
-        //    if (_taxRepo.ListStateTax().All(s => s.StateName != order.State))
-        //    {
-        //        response.Success = false;
-        //        response.Message = $"Error: we currently do not sell in {response.Order.State}";
-        //        return response;
-        //    }
-        //    var stateTaxData = _taxRepo.ListStateTax().First(s => s.StateName == order.State);
-
-        //    if (_productRepo.ListProducts().All(p => p.ProductType != order.ProductType))
-        //    {
-        //        response.Success = false;
-        //        response.Message = $"Error: SG Flooring does not sell {response.Order.ProductType}";
-        //        return response;
-        //    }
-        //    var productInfo = _productRepo.ListProducts().First(p => p.ProductType == order.ProductType);
-        //    response.Order.CostPerSquareFoot = productInfo.CostPerSquareFoot;
-        //    response.Order.LaborCostPerSquareFoot = productInfo.LaborCostPerSqaureFoot;
-        //    response.Order.ProductType = productInfo.ProductType;
-        //    response.Order.Area = order.Area;
-        //    response.Order.TaxRate = stateTaxData.TaxRate;
-        //    response.Order.State = stateTaxData.StateName;
-        //    response.Order.CustomerName = order.CustomerName;
-        //    response.Order.OrderNumber = order.OrderNumber;
-        //    response.Order.Date = order.Date;
-        //    response.Order = order;
-        //    response.Success = true;
-        //    return response;
-
-        //    throw new NotImplementedException();
-        //}
-        //    if (_taxRepo.ListStateTax().All(s => s.StateName != state))
-        //    {
-        //        response.Success = false;
-        //        response.Message = $"Error: we currently do not sell in {response.Order.State}";
-        //        return response;
-        //    }
-        //    var stateTaxData = _taxRepo.ListStateTax().First(s => s.StateName == state);
-        //    if (_productRepo.ListProducts().All(p => p.ProductType != productType))
-        //    {
-        //        response.Success = false;
-        //        response.Message = $"Error: SG Flooring does not sell {response.Order.ProductType}";
-        //        return response;
-        //    }
-        //    var productInfo = _productRepo.ListProducts().First(p => p.ProductType == productType);
-        //    response.Order.CostPerSquareFoot = productInfo.CostPerSquareFoot;
-        //    response.Order.LaborCostPerSquareFoot = productInfo.LaborCostPerSqaureFoot;
-        //    response.Order.ProductType = productInfo.ProductType;
-        //    response.Order.Area = area;
-        //    response.Order.TaxRate = stateTaxData.TaxRate;
-        //    response.Order.State = stateTaxData.StateName;
-        //    response.Order.CustomerName = customerName;
-        //    response.Order = response.Order;
-        //    response.Success = true;
-        //    return response;
-        //    //throw new NotImplementedException();
-        //
-        //if (!string.IsNullOrWhiteSpace(response.Order.CustomerName))
-        //{
-        //    response.Order.CustomerName = response.Order.CustomerName;
-        //}
-        //else
-        //{
-        //    response.Order.CustomerName = response.Order.CustomerName;
-        //}
-        //if (_taxRepo.ListStateTax().All(s => s.StateName != response.Order.State))
-        //{
-        //    response.Success = false;
-        //    response.Message = $"Error: we currently do not sell in {response.Order.State}";
-        //    return response;
-        //}
-        //response.Order.State = response.Order.State;
-        //var stateTaxData = _taxRepo.ListStateTax().First(s => s.StateName == response.Order.State);
-        //response.Order.TaxRate = stateTaxData.TaxRate;
-        //else
-        //{
-        //    order.State = response.Order.State;
-        //    order.TaxRate = response.Order.TaxRate;
-        //}
-        //if (!string.IsNullOrWhiteSpace(order.ProductType))
-        //{
-        //    if (_productRepo.ListProducts().All(p => p.ProductType != order.ProductType))
-        //    {
-        //        response.Success = false;
-        //        response.Message = $"Error: SG Flooring does not sell {order.ProductType}";
-        //        return response;
-        //    }
-        //    order.ProductType = response.Order.ProductType;
-        //    var productInfo = _productRepo.ListProducts().First(p => p.ProductType == order.ProductType);
-        //    order.CostPerSquareFoot = response.Order.CostPerSquareFoot;
-        //    order.LaborCostPerSquareFoot = response.Order.LaborCostPerSquareFoot;
-        //}
-        //else
-        //{
-        //    order.ProductType = response.Order.ProductType;
-        //    order.CostPerSquareFoot = response.Order.CostPerSquareFoot;
-        //    order.LaborCostPerSquareFoot = response.Order.LaborCostPerSquareFoot;
-        //}
-        //if(!string.IsNullOrWhiteSpace(order.Area.ToString()))
-        //{
-        //    if(order.Area < 100)
-        //    {
-        //        response.Success = false;
-        //        response.Message = $"Error: orders must be a minimum of 100 square feet.";
-        //        return response;
-        //    }
-        //    order.Area = response.Order.Area;
-        //}
-        //else
-        //{
-        //    order.Area = response.Order.Area;
-        //}
-        //response.Order = order;
-        //response.Success = true;
-        //return response;
-        //if (_orderRepo.LoadOrdersList(string.Format("/Data/System.IO/Orders_{0:MMddyyyy}.txt", order.Date)).Equals(null))
-        //{
-        //             response.Success = false;
-        //             response.Message = "Error: the date you entered is invalid.";
-        //             return response;
-        //         }
-        //_orderRepo.LoadOrdersList(string.Format("/Data/System.IO/Orders_{0:MMddyyyy}.txt", order.Date));
-
-        //if (_orderRepo.LoadOrdersList(string.Format("/Data/System.IO/Orders_{0:MMddyyyy}.txt", order.Date)).Any(o=>o.OrderNumber != order.OrderNumber))
-        //         {
-        //             response.Success = false;
-        //             response.Message = "Error: the order number entered was not a valid order number.";
-        //             return response;
-        //         }
+       
     }
 }
