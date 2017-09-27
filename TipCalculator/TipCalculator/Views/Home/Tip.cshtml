@@ -27,10 +27,13 @@
             <label>Percent To Tip</label>
             @Html.TextBoxFor(t=>t.PercentToTip, new { @class = "form-control"})
         </div>
-        @*<div class="form-group">
+        if (Model.BillAmount != 0)
+        {
+        <div class="form-group">
             <label>Tip Amount</label>
             @Html.TextBoxFor(t => t.AmountToTip, new { @class = "form-control" })
-        </div>*@
+        </div>
+        }
             <button class="btn btn-primary" type="submit">Calculate Tip</button>
      }
 

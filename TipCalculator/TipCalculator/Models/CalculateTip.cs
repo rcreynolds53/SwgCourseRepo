@@ -9,9 +9,7 @@ namespace TipCalculator.Models
     {
         public decimal BillAmount { get; set; }
         public decimal PercentToTip { get; set; }
-        public decimal AmountToTip
-         {
-           get { return BillAmount * (PercentToTip / 100); }
-            }
+        public decimal? AmountToTip => BillAmount * (PercentToTip / 100);
+
     }
 }

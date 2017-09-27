@@ -27,7 +27,7 @@ namespace TipCalculator.Controllers
         [HttpPost]
         public ActionResult Tip(CalculateTip model)
         {
-            return View("TipForm", model);
+            return View("Tip", model);
         }
     }
 }
