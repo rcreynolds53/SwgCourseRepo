@@ -1,0 +1,40 @@
+﻿@model TipCalculator.Models.CalculateTip
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tip</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+</head>
+<body>
+    <h1>Calculate Tip</h1>  
+    <div class="container">
+        <div class=" col-xs-4">
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <label>Bill</label>
+            @Html.TextBoxFor(t=>t.BillAmount, new {@class = "form-control"})
+        </div>
+        <div class="form-group">
+            <label>Percent To Tip</label>
+            @Html.TextBoxFor(t=>t.PercentToTip, new { @class = "form-control"})
+        </div>
+        @*<div class="form-group">
+            <label>Tip Amount</label>
+            @Html.TextBoxFor(t => t.AmountToTip, new { @class = "form-control" })
+        </div>*@
+            <button class="btn btn-primary" type="submit">Calculate Tip</button>
+     }
+
+        </div>
+     </div>
+    </body>
+    </html>
