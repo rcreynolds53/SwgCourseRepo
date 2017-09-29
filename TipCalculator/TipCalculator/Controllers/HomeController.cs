@@ -9,11 +9,11 @@ namespace TipCalculator.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
-        [HttpGet]
+        //GET: Home
+       [HttpGet]
         public ActionResult Tip()
         {
-            
+
             return View(new CalculateTip());
         }
 
@@ -21,13 +21,13 @@ namespace TipCalculator.Controllers
         public ActionResult Index()
         {
             return RedirectToAction("Tip");
-             
+
         }
 
         [HttpPost]
         public ActionResult Tip(CalculateTip model)
         {
-            return View("Tip", model);
+            return View("TipForm", model);
         }
     }
 }

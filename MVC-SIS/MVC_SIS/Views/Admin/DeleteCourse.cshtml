@@ -1,0 +1,23 @@
+﻿@model Exercises.Models.Data.Course
+
+@{
+    ViewBag.Title = "DeleteCourse";
+}
+<div class="row">
+    <div class="col-xs-12">
+        <h2>DeleteCourse</h2>
+        @Html.ActionLink("Return to Courses", "Courses", "Admin")
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("DeleteCourse", "Admin", FormMethod.Post))
+        {
+            @Html.HiddenFor(m=>m.CourseId)
+            <p>Are you sure you want to delete @Html.DisplayFor(m=>m.CourseName) from courses?</p>
+            <button class="btn btn-primary" type="submit">Delete Course</button>
+            @Html.ActionLink("Cancel", "Courses","Admin", null, new { @class ="btn btn-danger"})
+        }
+    </div>
+</div>
+

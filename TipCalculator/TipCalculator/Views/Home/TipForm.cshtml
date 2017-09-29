@@ -1,7 +1,7 @@
 ﻿@model TipCalculator.Models.CalculateTip
 
 @{
-    Layout = null;
+    ViewBag.Title = "Just the Tip";
 }
 
 <!DOCTYPE html>
@@ -17,22 +17,20 @@
     <h1>Calculate Tip</h1>
     <div class="container">
         <div class=" col-xs-4">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Default", "Home", FormMethod.Post))
             {
                 <div class="form-group">
                     <label>Bill</label>
-                    @Html.TextBoxFor(t => t.BillAmount, new { @class = "form-control" })
+                  @Html.TextBoxFor(t => t.BillAmount, new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     <label>Percent To Tip</label>
-                    @Html.TextBoxFor(t => t.PercentToTip, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                    <label>Tip Amount</label>
-                    @Html.TextBoxFor(t => t.AmountToTip, new { @class = "form-control" })
+                    @Html.TextBoxFor(t => t.PercentToTip, new { @class = "form-control", placeholder ="%" })
                 </div>
                 <button class="btn btn-primary" type="submit">Calculate Tip</button>
             }
+
+            @Html.TextBoxFor(m=>m.AmountToTip)
 
         </div>
     </div>
