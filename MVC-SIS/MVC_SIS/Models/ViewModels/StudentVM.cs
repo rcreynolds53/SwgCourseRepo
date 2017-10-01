@@ -15,6 +15,8 @@ namespace Exercises.Models.ViewModels
         public List<SelectListItem> MajorItems { get; set; }
         public List<SelectListItem> StateItems { get; set; }
         public List<int> SelectedCourseIds { get; set; }
+        public List<CoursesCheckBoxItem> CoursesCheckBoxes { get; set; }
+
 
         public StudentVM()
         {
@@ -23,6 +25,7 @@ namespace Exercises.Models.ViewModels
             StateItems = new List<SelectListItem>();
             SelectedCourseIds = new List<int>();
             Student = new Student();
+            CoursesCheckBoxes = new List<CoursesCheckBoxItem>();
         }
 
         public void SetCourseItems(IEnumerable<Course> courses)

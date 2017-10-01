@@ -48,5 +48,42 @@ namespace Exercises.Controllers
 
             return RedirectToAction("List");
         }
+        [HttpGet]
+        public ActionResult Edit(int studentId)
+        {
+            var student = StudentRepository.Get(studentId);
+
+            var viewModel = new StudentVM();
+
+            viewModel.SetCourseItems(CourseRepository.GetAll());
+            viewModel.SetMajorItems(MajorRepository.GetAll());
+            viewModel.SetStateItems(StateRepository.GetAll());
+            viewModel.Student.StudentId = student.StudentId;
+            viewModel.Student.FirstName = student.FirstName;
+            viewModel.Student.LastName = student.LastName;
+            viewModel.Student.GPA = student.GPA;
+            viewModel.Student.Major = student.Major;
+            viewModel.Student.Courses = student.Courses;
+            viewModel.Student.Address = student.Address;
+            viewModel.CoursesCheckBoxes = (from course in CourseRepository.GetAll()
+                                           select new CoursesCheckBoxItem { Course = course, IsSelected = student.Courses.Any(c => c.CourseId == course.CourseId) }).ToList();
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(StudentVM studentVM)
+        {
+            var selectedCourses = studentVM.CoursesCheckBoxes.Where(c => c.IsSelected).Select(c=>c.Course.CourseId);
+            studentVM.Student.Courses = new List<Course>();
+            foreach (var course in selectedCourses)
+                studentVM.Student.Courses.Add(CourseRepository.Get(course));
+            studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
+            //studentVM.Student.GPA = StudentRepository
+            StudentRepository.SaveAddress(studentVM.Student.StudentId, studentVM.Student.Address);
+            StudentRepository.Edit(studentVM.Student);
+            return RedirectToAction("List");
+
+        }
     }
 }

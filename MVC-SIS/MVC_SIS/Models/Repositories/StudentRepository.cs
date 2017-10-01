@@ -63,7 +63,9 @@ namespace Exercises.Models.Repositories
                     StudentId=3,
                     FirstName="Megan",
                     LastName="Smith",
-                    Major=new Major { MajorId=3,  MajorName="Computer Science" }
+                    Major=new Major { MajorId=3,  MajorName="Computer Science" },
+                    Courses=new List<Course>()
+                    
                 },
             };
         }
