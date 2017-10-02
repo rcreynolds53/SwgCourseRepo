@@ -162,6 +162,7 @@
     <Content Include="Views\Admin\EditCourse.cshtml" />
     <Content Include="Views\Admin\DeleteCourse.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
