@@ -24,3 +24,11 @@ textarea {
     float: right;
     width: 50%;
 }
+.validation-summary-errors {
+    color: red;
+    font-weight: bold;
+}
+.field-validation-error {
+    color: red;
+    font-weight: bold;
+}

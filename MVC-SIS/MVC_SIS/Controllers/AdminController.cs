@@ -27,8 +27,15 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddMajor(Major major)
         {
-            MajorRepository.Add(major.MajorName);
-            return RedirectToAction("Majors");
+            if (ModelState.IsValid)
+            {
+                MajorRepository.Add(major.MajorName);
+                return RedirectToAction("Majors");
+            }
+            else
+            {
+                return View(new Major());
+            }
         }
 
         [HttpGet]
@@ -41,8 +48,15 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult EditMajor(Major major)
         {
+            if(ModelState.IsValid)
+            {
             MajorRepository.Edit(major);
             return RedirectToAction("Majors");
+            }
+            else
+            {             
+                return View(major);
+            }
         }
 
         [HttpGet]
@@ -76,8 +90,10 @@ namespace Exercises.Controllers
         [HttpPost] 
         public ActionResult AddState(State state)
         {
-            StateRepository.Add(state);
-            return RedirectToAction("States");
+
+                StateRepository.Add(state);
+                return RedirectToAction("States");
+
         }
         [HttpGet]
         public ActionResult DeleteState(string stateAbbreviation)

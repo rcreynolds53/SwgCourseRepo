@@ -104,6 +104,7 @@ namespace Exercises.Models.Repositories
         public static void SaveAddress(int studentId, Address address)
         {
             var selectedStudent = _students.First(s => s.StudentId == studentId);
+            //selectedStudent.Address.AddressId = _students.Max(m => m.Address.AddressId) + 1;
             selectedStudent.Address = address;
         }
     }
