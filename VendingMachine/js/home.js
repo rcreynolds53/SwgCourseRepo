@@ -39,9 +39,34 @@ $('#itemsDiv').on('click', '.item', function () {
 
 });
 $('#return-change-button').on('click', function () {
+    var moneyIn = parseFloat($('#amountIn').val()).toFixed(2);
+    var quarters;
+    var dimes;
+    var nickels;
+  while (moneyIn !=0)
+  {
+      
+          quarters = moneyIn / .25;
+           quarters = Math.floor(quarters);
+          moneyIn = moneyIn % .25;
+          dimes = moneyIn / .10;
+          dimes = Math.floor(dimes);
+          moneyIn = moneyIn % .10;
+          nickels = moneyIn / .05;
+          nickels = Math.floor(nickels);
+          moneyIn = moneyIn % .05;
+          $('#changeBack').val("Quarters: "+ quarters +", Dimes: "+ dimes + ", Nickels: "+ nickels);
+          $('#amountIn').val("0.00");
+          $('#itemID').val("");
+          $('#itemName').val("");
+          $('#messages').val("");
+          currentTotal = 0;
+          return;
+      }
+
     $('#messages').val("");
     $('#itemsDiv').empty();
-    $('#amountIn').val("0");
+    $('#amountIn').val("0.00");
     $('#itemID').val("");
     $('#itemName').val("");
     $('#changeBack').val("");
@@ -60,12 +85,12 @@ $('#make-purchase-button').on('click', function () {
         url: url,
         success: function (change) { 
                 $('#changeBack').val("Quarters: "+ change.quarters +", Dimes: "+ change.dimes + ", Nickels: "+ change.nickels);
-           var totalChange = ((change.quarters * .25) + (change.dimes * .1) + (change.nickels *.05));
-           var itemPrice = amount-totalChange;
+           //var totalChange = ((change.quarters * .25) + (change.dimes * .1) + (change.nickels *.05));
+           //var itemPrice = amount-totalChange;
             currentTotal = 0;
             $('#messages').val("THANK YOU!");
             $('#itemsDiv').empty();
-            $('#amountIn').val(amount-itemPrice);
+            $('#amountIn').val(0.00);
             $('#itemID').val("");
             loadVendingMachine();
             
