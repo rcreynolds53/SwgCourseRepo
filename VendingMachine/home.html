@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Web Project</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/Site.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center">Vending Machine</h1>
+        <hr>
+        <div class="row">
+            <div class="col-xs-9">
+                <div class="row" id="itemsDiv">
+
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <form class="form" id="totalForm">
+                    <div class="row">
+                        <label class="col-xs-offset-3 form-labels" id="amountIn-label">Total $ In:</label>
+                        <input class="col-xs-offset-1 col-xs-10" id="amountIn" value = "0.00" readonly>
+                        <br>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-primary col-xs-offset-1" type="button" id="add-dollar-button">Add Dollar</button>
+                        <button class="btn btn-primary col-xs-offset-1" type="button" id="add-quarter-button">Add Quarter</button>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <button class="btn btn-primary col-xs-offset-1" type="button" id="add-dime-button">Add Dime</button>
+                        <button class="btn btn-primary col-xs-offset-1" type="button" id="add-nickel-button">Add Nickel</button>
+                    </div>
+                    <hr>
+                </form>
+                <form class="form" id="messageForm">
+                    <div class="row">
+                        <label class="col-xs-offset-4 form-labels control-label" id="messages-label">Messages:</label>
+                        <input class="col-xs-offset-1 col-xs-10" id="messages" type="text" readonly>
+                        <br>
+                    </div>
+                    <div class="row">
+                        <label id="itemId-label" for="itemId" class=" form-labels control-label col-xs-offset-1">Item:</label><input id="itemName" class="col-xs-offset-1" readonly>
+                        <input id="itemID" type="hidden">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <button class="btn btn-primary col-xs-offset-1 col-xs-10" id="make-purchase-button" type="button">Make Purchase</button>
+                    </div>
+                    <hr>
+                </form>
+                <form class="form" id="changeForm">
+                    <div class="row">
+                        <label id="change-label" for="changeBack" class=" col-xs-offset-4 form-labels control-label">Change:</label>
+                        <input id="changeBack" class="col-xs-offset-1 col-xs-10" readonly>
+                        <button class="btn btn-primary col-xs-offset-1 col-xs-10" id="return-change-button" type="button">Return Change</button> 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+        <!-- </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <div id="item4Div" class="items"> </div>
+            </div>
+            <div class="col-xs-3">
+                <div id="item5Div" class="items"></div>
+            </div>
+            <div class="col-xs-3">
+                <div id="item6Div" class="items"></div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <div id="item7Div" class="items"></div>
+            </div>
+            <div class="col-xs-3">
+                <div id="item8Div" class="items"></div>
+            </div>
+            <div class="col-xs-3">
+                <div id="item9Div" class="items"></div>
+            </div>
+
+        </div>
+    </div> -->
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/home.js"></script>
+</body>
+
+</html>
