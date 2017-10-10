@@ -97,7 +97,14 @@ $('#make-purchase-button').on('click', function () {
            
         },
         error: function (jpXHR, textStatus, errorThrown) {
+            if(jpXHR.responseJSON.message == "No message available")
+            {
+                $('#messages').val("Error: No item selected.");
+            }
+            else
+            {
             $('#messages').val(jpXHR.responseJSON.message);
+            }
            
         }
     });
@@ -135,8 +142,3 @@ function loadVendingMachine() {
         }
     });
 }
-
-//AddDollar();
-//AddQuarter();
-//AddDime();
-//AddNickel();
