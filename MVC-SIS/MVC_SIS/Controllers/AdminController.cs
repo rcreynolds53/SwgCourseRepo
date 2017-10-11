@@ -27,9 +27,19 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddMajor(Major major)
         {
-
+            if (string.IsNullOrEmpty(major.MajorName))
+            {
+                ModelState.AddModelError("MajorName", "Please enter a major.");
+            }
+            if (ModelState.IsValid)
+            {
                 MajorRepository.Add(major.MajorName);
                 return RedirectToAction("Majors");
+            }
+            else
+            {
+                return View(new Major());
+            }
         }
 
         [HttpGet]
