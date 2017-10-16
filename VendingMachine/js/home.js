@@ -92,6 +92,7 @@ $('#make-purchase-button').on('click', function () {
             $('#itemsDiv').empty();
             $('#amountIn').val(0.00);
             $('#itemID').val("");
+            $('#itemName').val("");            
             loadVendingMachine();
             
            
